@@ -1,0 +1,15 @@
+{
+  "name": "Missionsteam",
+  "short_name": "M-Team",
+  "lang": "de-DE",
+  "start_url": "/.selectplan/index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "book-icon512x512.png",
+      "sizes": "512x512",
+      "type": "image\/png"
+    }
+  ]
+}
