@@ -1,0 +1,27 @@
+.wrapper {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: 'Varela Round';
+}
+
+.wrapper button {
+  color: #fff;
+  border: 1px solid #34495e;
+  margin: 5px 0;
+  background-color: #34495e;
+}
+
+.wrapper .signUpBtn {
+  background-color: #fff;
+  color: #34495e;
+}
+
+.wrapper input, .wrapper button {
+  border: 1px solid #ddd;
+  margin: 10px 0;
+  width: 100%;
+  border-radius: 5px;
+  height: 40px;
+}

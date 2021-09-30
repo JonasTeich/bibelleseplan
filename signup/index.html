@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@1.22.3/dist/umd/supabase.min.js"></script>
+  <link rel="stylesheet" href="signup.css">
+  <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="inputForm">
+    <div class="wrapper">
+        <h2>Melde dich an</h2>
+        <div class="errorMessage"></div>
+        <label>
+            Email
+            <br/>
+            <input type="email" class="emailInput">
+        </label>
+        <label>
+            Username
+            <br/>
+            <input type="text" class="usernameInput">
+        </label>
+        <label>
+            Password
+            <br/>
+            <input type="password" class="passwordInput">
+        </label>
+        <label>
+            Repeat password
+            <br/>
+            <input type="password" id="passwordRetype" class="passwordInput">
+        </label>
+        <button class="signUpBtn">Sign up</button>
+        <button class="loginBtn secondaryBtn">Login instead</button>
+    </div>
+    <script src="signup.js"></script>
+</div>
+</body>
+</html>

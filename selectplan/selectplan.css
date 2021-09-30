@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Varela Round';
+}
+
+header {
+  background-color: #34495e;
+  color: #fff;
+  padding: 20px;
+}
+
+.content {
+  padding: 20px;
+}
+
+.plan {
+  padding: 20px;
+  background-color: #efefef;
+}
