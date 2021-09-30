@@ -19,7 +19,7 @@ async function setUp () {
 
 document.querySelector('.footer input').addEventListener('click', async () => {
   const { data } = await supabase
-    .from('Jakobus')
+    .from(localStorage.getItem('selectedPlan'))
     .select()
     .filter('id', 'eq', localStorage.getItem('selectedIndex'))
   
@@ -30,7 +30,7 @@ document.querySelector('.footer input').addEventListener('click', async () => {
   }
   
   await supabase
-    .from('Jakobus')
+    .from(localStorage.getItem('selectedPlan'))
     .update({ read: data[0].read })
     .eq('id', localStorage.getItem('selectedIndex'))
 })
@@ -62,12 +62,12 @@ async function getLogedInUser () {
 
 async function getDataFromSupabase () {
   data = await supabase
-    .from('Jakobus')
+    .from(localStorage.getItem('selectedPlan'))
     .select()
     .filter('id', 'eq', localStorage.getItem('selectedIndex'))
 
   count = await supabase
-    .from('Jakobus')
+    .from(localStorage.getItem('selectedPlan'))
     .select('*', { count: 'exact' })
   
   if (data.data[0].read.includes(logedInUser.data[0].username)) {

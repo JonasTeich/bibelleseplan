@@ -16,6 +16,17 @@ header {
 }
 
 .plan {
-  padding: 20px;
   background-color: #efefef;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.cover img {
+  max-width: 100%;
+}
+
+.name {
+  margin: 20px;
+  font-size: 23px;
+  text-align: center;
 }

@@ -13,7 +13,7 @@ async function displayDays () {
     document.location.href = '../signin'
   }
   plan = await supabase
-    .from('Jakobus')
+    .from(localStorage.getItem('selectedPlan'))
     .select()
   users = await supabase
     .from('users')
@@ -47,6 +47,10 @@ async function displayDays () {
 
 document.querySelector('.close-btn').addEventListener('click', () => {
   document.querySelector('.info-box-wrapper').style.display = 'none'
+})
+
+document.querySelector('header .material-icons').addEventListener('click', () => {
+  document.location.href = '../selectplan'
 })
 
 Element.prototype.insertChildAtIndex = function (child, index) {

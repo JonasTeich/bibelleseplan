@@ -50,7 +50,7 @@ async function signUpProcess() {
         .from('users')
         .update({ username: usernameInput.value })
         .match(getUser())
-      document.location.href = '../plan'
+      document.location.href = '../selectplan'
     }
   }
 }

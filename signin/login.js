@@ -37,7 +37,7 @@ function loginAndVerifiy() {
       errorMessageField.append(errorMessage);
     }
     else {
-      document.location.href = '../plan';
+      document.location.href = '../selectplan';
     }
   }))
 }
