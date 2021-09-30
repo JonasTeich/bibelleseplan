@@ -12,6 +12,6 @@ jobs:
       uses: SamKirkland/FTP-Deploy-Action@4.0.0
       with:
         server: hosting125544.a2fe2.netcup.net
-        username: chat.programmierkurs-dn.de
+        username: bibelleseplan.missionsteam-dn.de
         password: ${{ secrets.password }}
         local-dir: ./
