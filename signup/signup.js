@@ -41,7 +41,7 @@ async function signUpProcess() {
       email: emailInput.value,
       password: passwordInput.value
     })
-
+    console.log(signUpRequest)
     // error? then append error message
     if (signUpRequest.error != null) {
       appendErrorMessage(signUpRequest.error.message)
