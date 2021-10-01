@@ -53,6 +53,33 @@ document.querySelector('.forward').addEventListener('click', () => {
   }
 })
 
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    saveThought()
+  }
+})
+document.querySelector('.section .material-icons').addEventListener('click', saveThought)
+
+async function saveThought () {
+  const { data } = await supabase
+    .from(localStorage.getItem('selectedPlan'))
+    .select()
+    .filter('id', 'eq', localStorage.getItem('selectedIndex'))
+  
+  const thoughtText = document.querySelector('.input input').value
+  const username = logedInUser.data[0].username
+  const thought = { text: thoughtText, username: username}
+  if (thought.text.length > 3) {
+    data[0].thoughts.push(thought)
+    await supabase
+      .from(localStorage.getItem('selectedPlan'))
+      .update({ thoughts: data[0].thoughts })
+      .filter('id', 'eq', localStorage.getItem('selectedIndex'))
+    appendThought(thought)
+    document.querySelector('.input input').value = ''
+  }
+}
+
 async function getLogedInUser () {
   logedInUser = await supabase
     .from('users')
@@ -120,6 +147,9 @@ async function getDataFromSupabase () {
     li.innerText = item
     document.querySelector('.challenge-list').appendChild(li)
   })
+  data.data[0].thoughts.map((item) => {
+    appendThought(item)
+  })
 }
 
 function bibleVers (vers) {
@@ -138,4 +168,10 @@ function buildPointString (point) {
     return localStorage.getItem('selectedPlan') + ' ' + (parseInt(point[0][1], 10) + 1) + ', ' + (parseInt(point[0][2], 10) + 1) + '-' + (parseInt(point[point.length - 1][2], 10) + 1)
   }
   return localStorage.getItem('selectedPlan') + ' ' + (parseInt(point[0][1], 10) + 1)+ ', ' + (parseInt(point[0][2], 10) + 1)
+}
+
+function appendThought (element) {
+  const li = document.createElement('li')
+  li.innerHTML = element.username + ':<br>' + element.text
+  document.querySelector('.thoughts-list').appendChild(li)
 }
