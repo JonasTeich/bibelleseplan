@@ -135,7 +135,7 @@ async function getDataFromSupabase () {
   }
   data.data[0].think.map((item) => {
     const li = document.createElement('li')
-    li.innerText = item
+    li.innerHTML = item
     document.querySelector('.think-list').appendChild(li)
   })
   if (data.data[0].pray.length < 1) {
