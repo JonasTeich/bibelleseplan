@@ -47,6 +47,7 @@ async function displayDays () {
 
 document.querySelector('.close-btn').addEventListener('click', () => {
   document.querySelector('.info-box-wrapper').style.display = 'none'
+  document.querySelector('body').style.overflow = 'scroll'
 })
 
 document.querySelector('header .material-icons').addEventListener('click', () => {
@@ -78,4 +79,5 @@ const openInfoBox = (day, i) => {
   })
   document.querySelector('.info-box-wrapper').style.display = 'flex'
   document.querySelector('.info-box h3').innerText = 'Tag ' + day
+  document.querySelector('body').style.overflow = 'hidden'
 }

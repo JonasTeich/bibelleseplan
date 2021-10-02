@@ -17,7 +17,8 @@ var supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 navigator.serviceWorker.getRegistrations().then(function(registrations) {
   for(let registration of registrations) {
    registration.unregister()
- } })
+  }
+})
 
 signUpBtn.addEventListener('click', () => {
   signUpProcess()

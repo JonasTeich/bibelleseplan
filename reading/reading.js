@@ -55,6 +55,7 @@ document.querySelector('.forward').addEventListener('click', () => {
 
 document.querySelector('.close-btn').addEventListener('click', () => {
     document.querySelector('.selected-vers-wrapper').style.display = 'none'
+    document.querySelector('body').style.overflow = 'scroll'
 })
 
 document.addEventListener('keydown', e => {
@@ -113,9 +114,11 @@ async function getDataFromSupabase () {
   
   if (parseInt(localStorage.getItem('selectedIndex'), 10) === count.count) {
     document.querySelector('.forward').style.opacity = .3
+    document.querySelector('.foward').style.cursor = 'not-allowed'
   }
   if (parseInt(localStorage.getItem('selectedIndex'), 10) === 1) {
     document.querySelector('.back').style.opacity = .3
+    document.querySelector('.back').style.cursor = 'not-allowed'
   }
     
   const point = document.querySelectorAll('.book-chapter-vers')
@@ -158,7 +161,7 @@ async function getDataFromSupabase () {
   const list = document.querySelectorAll('.vers')
   for (let i = 0; i < list.length; i++) {
     list[i].addEventListener('click', () => {
-      showVers(list[i].classList[1], list[i].classList[2], list[i].classList[3], list[i].innerText)
+      showVers(list[i].classList[2], list[i].classList[3], list[i].classList[4], list[i].innerText, parseInt(list[i].classList[1].replace('f', '')))
     })
   }
 }
@@ -167,7 +170,7 @@ function bibleVers (vers) {
   let verses
   bibleJSON.filter((element) => {
     if (element.abbrev === vers[0]) {
-      verses = element.chapters[vers[1]][vers[2]]
+      verses = '<span class="number">' + (parseInt(vers[2], 10) + 1) + '</span> ' + element.chapters[vers[1]][vers[2]]
       return true
     }
   })
@@ -187,15 +190,19 @@ function appendThought (element) {
   document.querySelector('.thoughts-list').appendChild(li)
 }
 
-function showVers (book, chapter, vers, point) {
+function showVers (book, chapter, vers, point, number) {
   if (vers === undefined) {
     vers = chapter
   }
   document.querySelector('.selected-vers-wrapper').style.display = 'flex'
+  document.querySelector('body').style.overflow = 'hidden'
+  document.querySelector('.selected-vers-box h3').innerText = point
+  document.querySelector('.selected-vers-box p').innerText = ''
   bibleJSON.filter((element) => {
     if (element.abbrev === book) {
-      document.querySelector('.selected-vers-box h3').innerText = point
-      document.querySelector('.selected-vers-box p').innerText = element.chapters[chapter][vers]
+      for (let i = 0; i < number; i++) {
+        document.querySelector('.selected-vers-box p').innerHTML += '<span class="number">' + (parseInt(vers, 10) + i + 1) + '</span> ' + element.chapters[parseInt(chapter, 10)][parseInt(vers, 10) + i] + '<br>'
+      }
       return true
     }
   })
