@@ -41,7 +41,8 @@ async function displayDays () {
         document.location.href = '../reading'
       }
     })
-    document.querySelector('.content').insertChildAtIndex(div, parseInt(plan.data[i].id, 10) - 1)
+    document.querySelector('.content').appendChild(div)
+    document.querySelector('.content').insertChildAtIndex()
   }
 }
 
@@ -54,12 +55,24 @@ document.querySelector('header .material-icons').addEventListener('click', () =>
   document.location.href = '../selectplan'
 })
 
-Element.prototype.insertChildAtIndex = function (child, index) {
-  if (!index) index = 0
-  if (index >= this.children.length) {
-    this.appendChild(child)
-  } else {
-    this.insertBefore(child, this.children[index])
+Element.prototype.insertChildAtIndex = function () {
+  var items = this.childNodes;
+  var itemsArr = [];
+  for (var i in items) {
+    if (items[i].nodeType == 1) { // get rid of the whitespace text nodes
+      itemsArr.push(items[i]);
+    }
+  }
+
+  itemsArr.sort(function(a, b) {
+    console.log(parseInt(a.children[1].innerText.replace('Tag ', ''), 10))
+    return parseInt(a.children[1].innerText.replace('Tag ', ''), 10) == parseInt(b.children[1].innerText.replace('Tag ', ''), 10)
+    ? 0
+    : (parseInt(a.children[1].innerText.replace('Tag ', ''), 10) > parseInt(b.children[1].innerText.replace('Tag ', ''), 10) ? 1 : -1);
+  });
+
+  for (i = 0; i < itemsArr.length; ++i) {
+    this.appendChild(itemsArr[i]);
   }
 }
 
