@@ -53,6 +53,10 @@ document.querySelector('.forward').addEventListener('click', () => {
   }
 })
 
+document.querySelector('.close-btn').addEventListener('click', () => {
+    document.querySelector('.selected-vers-wrapper').style.display = 'none'
+})
+
 document.addEventListener('keydown', e => {
   if (e.key === 'Enter') {
     saveThought()
