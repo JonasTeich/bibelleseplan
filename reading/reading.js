@@ -150,6 +150,13 @@ async function getDataFromSupabase () {
   data.data[0].thoughts.map((item) => {
     appendThought(item)
   })
+
+  const list = document.querySelectorAll('.vers')
+  for (let i = 0; i < list.length; i++) {
+    list[i].addEventListener('click', () => {
+      showVers(list[i].classList[1], list[i].classList[2], list[i].classList[3], list[i].innerText)
+    })
+  }
 }
 
 function bibleVers (vers) {
@@ -174,4 +181,18 @@ function appendThought (element) {
   const li = document.createElement('li')
   li.innerHTML = element.username + ':<br>' + element.text
   document.querySelector('.thoughts-list').appendChild(li)
+}
+
+function showVers (book, chapter, vers, point) {
+  if (vers === undefined) {
+    vers = chapter
+  }
+  document.querySelector('.selected-vers-wrapper').style.display = 'flex'
+  bibleJSON.filter((element) => {
+    if (element.abbrev === book) {
+      document.querySelector('.selected-vers-box h3').innerText = point
+      document.querySelector('.selected-vers-box p').innerText = element.chapters[chapter][vers]
+      return true
+    }
+  })
 }

@@ -14,6 +14,10 @@ var supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 // if ('serviceWorker' in navigator) {
 //   navigator.serviceWorker.register('../service-worker.js')
 // }
+navigator.serviceWorker.getRegistrations().then(function(registrations) {
+  for(let registration of registrations) {
+   registration.unregister()
+ } })
 
 signUpBtn.addEventListener('click', () => {
   signUpProcess()
@@ -45,7 +49,6 @@ async function signUpProcess() {
       email: emailInput.value,
       password: passwordInput.value
     })
-    console.log(signUpRequest)
     // error? then append error message
     if (signUpRequest.error != null) {
       appendErrorMessage(signUpRequest.error.message)
