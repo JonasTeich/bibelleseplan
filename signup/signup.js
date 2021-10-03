@@ -27,12 +27,12 @@ passwordRetype.addEventListener('keypress', (e) => {
 
 loginBtn.addEventListener('click', () => {
   navigator.serviceWorker.getRegistration().then(result => {
-    if (result !== undefined) {
-      for(let registration of result) {
-        errorSection.innerText = registration
-        registration.unregister()
-      }
-    }
+    errorSection.innerText = result
+    // if (result !== undefined) {
+    //   for(let registration of result) {
+    //     registration.unregister()
+    //   }
+    // }
     // document.location.href = "../signin"
   })
 })
