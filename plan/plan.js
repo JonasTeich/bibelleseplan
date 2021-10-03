@@ -65,7 +65,6 @@ Element.prototype.sortChildren = function () {
   }
 
   itemsArr.sort(function(a, b) {
-    console.log(parseInt(a.children[1].innerText.replace('Tag ', ''), 10))
     return parseInt(a.children[1].innerText.replace('Tag ', ''), 10) == parseInt(b.children[1].innerText.replace('Tag ', ''), 10)
     ? 0
     : (parseInt(a.children[1].innerText.replace('Tag ', ''), 10) > parseInt(b.children[1].innerText.replace('Tag ', ''), 10) ? 1 : -1)

@@ -15,14 +15,6 @@ if (supabase.auth.user() !== null) {
   document.location.href = '../selectplan'
 }
 
-navigator.serviceWorker.getRegistration().then(result => {
-  if (result !== undefined) {
-    for(let registration of result) {
-      registration.unregister()
-    }
-  }
-})
-
 signUpBtn.addEventListener('click', () => {
   signUpProcess()
 })
@@ -34,7 +26,14 @@ passwordRetype.addEventListener('keypress', (e) => {
 });
 
 loginBtn.addEventListener('click', () => {
-  document.location.href = "../signin"
+  navigator.serviceWorker.getRegistration().then(result => {
+    if (result !== undefined) {
+      for(let registration of result) {
+        registration.unregister()
+      }
+    }
+    document.location.href = "../signin"
+  })
 })
 
 async function getUser () {
