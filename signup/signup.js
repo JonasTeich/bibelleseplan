@@ -11,9 +11,9 @@ const SUPABASE_URL = 'https://hkfomhpjagnnioxqgane.supabase.co'
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzMjgzMDY5NCwiZXhwIjoxOTQ4NDA2Njk0fQ.uYldi0Q_JK7bfYYjG98YctlmxQ7MWZfKqnvW_yalSAw'
 var supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// if (supabase.auth.user() !== null) {
-//   document.location.href = '../selectplan'
-// }
+if (supabase.auth.user() !== null) {
+  document.location.href = '../selectplan'
+}
 
 signUpBtn.addEventListener('click', () => {
   signUpProcess()
@@ -26,15 +26,15 @@ passwordRetype.addEventListener('keypress', (e) => {
 });
 
 loginBtn.addEventListener('click', () => {
-  navigator.serviceWorker.getRegistration().then(result => {
-    errorSection.innerText = result
+  // navigator.serviceWorker.getRegistration().then(result => {
+  //   errorSection.innerText = result[0]
     // if (result !== undefined) {
     //   for(let registration of result) {
     //     registration.unregister()
     //   }
     // }
-    // document.location.href = "../signin"
-  })
+  // })
+  document.location.href = "../signin"
 })
 
 async function getUser () {
