@@ -11,15 +11,22 @@ const SUPABASE_URL = 'https://hkfomhpjagnnioxqgane.supabase.co'
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzMjgzMDY5NCwiZXhwIjoxOTQ4NDA2Njk0fQ.uYldi0Q_JK7bfYYjG98YctlmxQ7MWZfKqnvW_yalSAw'
 var supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// if ('serviceWorker' in navigator) {
-//   navigator.serviceWorker.register('../service-worker.js')
-// }
+if (supabase.auth.user() !== null) {
+  document.location.href = '../selectplan'
+}
+
+navigator.serviceWorker.getRegistration().then(result => {
+  if (result !== undefined) {
+    for(let registration of result) {
+      registration.unregister()
+    }
+  }
+})
 
 signUpBtn.addEventListener('click', () => {
   signUpProcess()
 })
 
-// enter to submit
 passwordRetype.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
     signUpProcess()
@@ -39,13 +46,11 @@ async function getUser () {
 }
 
 async function signUpProcess() {
-  // is passwords ok? then signUp request
   if (checkPasswordHealth()) {
     const signUpRequest = await supabase.auth.signUp({
       email: emailInput.value,
       password: passwordInput.value
     })
-    // error? then append error message
     if (signUpRequest.error != null) {
       appendErrorMessage(signUpRequest.error.message)
     } else {
@@ -58,13 +63,12 @@ async function signUpProcess() {
   }
 }
 
-// check if pasword is equal and has at least 8 chars
 function checkPasswordHealth() {
   if (passwordRetype.value != passwordInput.value) {
-    appendErrorMessage("Passwords not equal!")
+    appendErrorMessage("Passworter nicht gleich!")
     return false
   } else if (passwordInput.value.length < 8) {
-    appendErrorMessage("Password to weak")
+    appendErrorMessage("Passwort zu schwach")
     return false
   }
   return true

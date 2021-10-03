@@ -55,7 +55,7 @@ document.querySelector('.forward').addEventListener('click', () => {
 
 document.querySelector('.close-btn').addEventListener('click', () => {
     document.querySelector('.selected-vers-wrapper').style.display = 'none'
-    document.querySelector('body').style.overflow = 'scroll'
+    document.querySelector('body').style.overflowY = 'scroll'
 })
 
 document.addEventListener('keydown', e => {
@@ -195,7 +195,7 @@ function showVers (book, chapter, vers, point, number) {
     vers = chapter
   }
   document.querySelector('.selected-vers-wrapper').style.display = 'flex'
-  document.querySelector('body').style.overflow = 'hidden'
+  document.querySelector('body').style.overflowY = 'hidden'
   document.querySelector('.selected-vers-box h3').innerText = point
   document.querySelector('.selected-vers-box p').innerText = ''
   bibleJSON.filter((element) => {

@@ -42,25 +42,25 @@ async function displayDays () {
       }
     })
     document.querySelector('.content').appendChild(div)
-    document.querySelector('.content').insertChildAtIndex()
+    document.querySelector('.content').sortChildren()
   }
 }
 
 document.querySelector('.close-btn').addEventListener('click', () => {
   document.querySelector('.info-box-wrapper').style.display = 'none'
-  document.querySelector('body').style.overflow = 'scroll'
+  document.querySelector('body').style.overflowY = 'scroll'
 })
 
 document.querySelector('header .material-icons').addEventListener('click', () => {
   document.location.href = '../selectplan'
 })
 
-Element.prototype.insertChildAtIndex = function () {
-  var items = this.childNodes;
-  var itemsArr = [];
+Element.prototype.sortChildren = function () {
+  var items = this.childNodes
+  var itemsArr = []
   for (var i in items) {
-    if (items[i].nodeType == 1) { // get rid of the whitespace text nodes
-      itemsArr.push(items[i]);
+    if (items[i].nodeType == 1) {
+      itemsArr.push(items[i])
     }
   }
 
@@ -68,11 +68,11 @@ Element.prototype.insertChildAtIndex = function () {
     console.log(parseInt(a.children[1].innerText.replace('Tag ', ''), 10))
     return parseInt(a.children[1].innerText.replace('Tag ', ''), 10) == parseInt(b.children[1].innerText.replace('Tag ', ''), 10)
     ? 0
-    : (parseInt(a.children[1].innerText.replace('Tag ', ''), 10) > parseInt(b.children[1].innerText.replace('Tag ', ''), 10) ? 1 : -1);
+    : (parseInt(a.children[1].innerText.replace('Tag ', ''), 10) > parseInt(b.children[1].innerText.replace('Tag ', ''), 10) ? 1 : -1)
   });
 
   for (i = 0; i < itemsArr.length; ++i) {
-    this.appendChild(itemsArr[i]);
+    this.appendChild(itemsArr[i])
   }
 }
 
@@ -92,5 +92,5 @@ const openInfoBox = (day, i) => {
   })
   document.querySelector('.info-box-wrapper').style.display = 'flex'
   document.querySelector('.info-box h3').innerText = 'Tag ' + day
-  document.querySelector('body').style.overflow = 'hidden'
+  document.querySelector('body').style.overflowY = 'hidden'
 }

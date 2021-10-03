@@ -4,6 +4,8 @@
   flex-direction: column;
   justify-content: center;
   font-family: 'Varela Round';
+  max-width: 800px;
+  margin: auto;
 }
 
 .wrapper button {
