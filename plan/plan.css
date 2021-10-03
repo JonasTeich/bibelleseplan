@@ -95,16 +95,22 @@ header .material-icons {
   top: 20px;
   right: 20px;
   border-radius: 50%;
-  background-color: #34495e;
-  color: #fff;
+  color: #34495e;
+  font-weight: 900;
   padding: 3px;
-  font-size: 18px;
+  font-size: 24px;
   cursor: pointer;
 }
 
 .scroll-box {
   max-height: 300px;
   overflow: auto;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scroll-box::-webkit-scrollbar {
+  display: none;
 }
 
 .info-box h3 {

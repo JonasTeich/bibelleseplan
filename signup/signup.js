@@ -23,18 +23,10 @@ passwordRetype.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
     signUpProcess()
   }
-});
+})
 
 loginBtn.addEventListener('click', () => {
-  // navigator.serviceWorker.getRegistration().then(result => {
-  //   errorSection.innerText = result[0]
-    // if (result !== undefined) {
-    //   for(let registration of result) {
-    //     registration.unregister()
-    //   }
-    // }
-  // })
-  document.location.href = "../signin"
+  document.location.href = '../signin'
 })
 
 async function getUser () {
@@ -65,10 +57,10 @@ async function signUpProcess() {
 
 function checkPasswordHealth() {
   if (passwordRetype.value != passwordInput.value) {
-    appendErrorMessage("Passworter nicht gleich!")
+    appendErrorMessage('Passworter nicht gleich!')
     return false
   } else if (passwordInput.value.length < 8) {
-    appendErrorMessage("Passwort zu schwach")
+    appendErrorMessage('Passwort zu schwach')
     return false
   }
   return true
