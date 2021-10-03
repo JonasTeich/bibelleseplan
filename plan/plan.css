@@ -5,6 +5,11 @@
   font-family: 'Varela Round';
 }
 
+body {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 .material-icons {
   cursor: pointer;
 }
@@ -109,7 +114,7 @@ header .material-icons {
   scrollbar-width: none;  /* Firefox */
 }
 
-.scroll-box::-webkit-scrollbar {
+.scroll-box::-webkit-scrollbar, body::-webkit-scrollbar {
   display: none;
 }
 

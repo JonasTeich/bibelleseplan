@@ -7,6 +7,15 @@
   font-size: 18px;
 }
 
+body {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
 .material-icons {
   cursor: pointer;
 }
