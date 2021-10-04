@@ -5,7 +5,6 @@ var supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 let data
 let logedInUser
 
-
 setUp()
 
 async function setUp () {
@@ -35,8 +34,14 @@ document.querySelector('.footer input').addEventListener('click', async () => {
     .eq('id', localStorage.getItem('selectedIndex'))
 })
 
-document.querySelector('header .material-icons').addEventListener('click', () => {
+document.querySelector('header .back-btn').addEventListener('click', () => {
   document.location.href = '../plan'
+})
+
+document.querySelector('header .bible-btn').addEventListener('click', () => {
+  localStorage.setItem('selectedBook', localStorage.getItem('selectedPlan'))
+  localStorage.setItem('selectedChapter', 0)
+  document.location.href = '../bible'
 })
 
 document.querySelector('.back').addEventListener('click', () => {
@@ -198,6 +203,15 @@ function showVers (book, chapter, vers, point, number) {
   document.querySelector('body').style.overflowY = 'hidden'
   document.querySelector('.selected-vers-box h3').innerText = point
   document.querySelector('.selected-vers-box p').innerText = ''
+  document.querySelector('.selected-vers-wrapper button').addEventListener('click', () => {
+    bibleJSON.filter(books => {
+      if (books.abbrev === book) {
+        localStorage.setItem('selectedBook', books.name)
+        localStorage.setItem('selectedChapter', chapter)
+      }
+    })
+    document.location.href = '../bible'
+  })
   bibleJSON.filter((element) => {
     if (element.abbrev === book) {
       for (let i = 0; i < number; i++) {
