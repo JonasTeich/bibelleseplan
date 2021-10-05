@@ -9,7 +9,8 @@ let plan
 displayDays()
 
 async function displayDays () {
-  if (supabase.auth.user() === null) {
+  const user = await supabase.auth.user()
+  if (user === null) {
     document.location.href = '../signin'
   }
   plan = await supabase

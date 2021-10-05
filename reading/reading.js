@@ -8,7 +8,8 @@ let logedInUser
 setUp()
 
 async function setUp () {
-  if (supabase.auth.user() === null) {
+  const user = await supabase.auth.user()
+  if (user === null) {
     document.location.href = '../signin'
   }
   await getLogedInUser()
@@ -59,7 +60,8 @@ document.querySelector('.forward').addEventListener('click', () => {
 })
 
 document.querySelector('.close-btn').addEventListener('click', () => {
-    document.querySelector('.selected-vers-wrapper').style.display = 'none'
+    document.querySelector('.selected-vers-wrapper').classList.remove('active')
+    document.querySelector('.selected-vers-box').classList.remove('active-box')
     document.querySelector('body').style.overflowY = 'scroll'
 })
 
@@ -199,7 +201,8 @@ function showVers (book, chapter, vers, point, number) {
   if (vers === undefined) {
     vers = chapter
   }
-  document.querySelector('.selected-vers-wrapper').style.display = 'flex'
+  document.querySelector('.selected-vers-box').classList.add('active-box')
+  document.querySelector('.selected-vers-wrapper').classList.add('active')
   document.querySelector('body').style.overflowY = 'hidden'
   document.querySelector('.selected-vers-box h3').innerText = point
   document.querySelector('.selected-vers-box p').innerText = ''

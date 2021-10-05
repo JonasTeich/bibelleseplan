@@ -17,6 +17,26 @@ document.querySelector('header .material-icons').addEventListener('click', () =>
   document.location.href = '../reading'
 })
 
+document.querySelector('.forward').addEventListener('click', () => {
+  if (chapterSelect.value < chapterSelect.max) {
+    chapterSelect.value++
+  } else {
+    bookSelect.selectedIndex++
+    chapterSelect.value = 1
+  }
+  showChapter()
+})
+document.querySelector('.back').addEventListener('click', () => {
+  if (chapterSelect.value > chapterSelect.min) {
+    chapterSelect.value--
+    showChapter()
+  } else {
+    bookSelect.selectedIndex--
+    showChapter()
+    chapterSelect.value = chapterSelect.max
+  }
+})
+
 function selectSelected () {
   if (localStorage.getItem('selectedBook')) {
     bookSelect.value = localStorage.getItem('selectedBook')

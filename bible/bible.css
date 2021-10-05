@@ -24,8 +24,9 @@ html, body {
 
 header {
   position: sticky;
-  width: 100%;
+  top: 0;
   background-color: #34495e;
+  font-size: 20px;
   color: #fff;
 }
 
@@ -88,4 +89,21 @@ h2 {
 
 .text p {
   font-family: 'Gideon Roman';
+  margin-bottom: 5px;
+}
+
+.footer {
+  position: sticky;
+  bottom: 0;
+  background-color: #eee;
+  font-size: 20px;
+  color: #34495e;
+}
+
+.footer div {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
 }

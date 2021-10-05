@@ -9,8 +9,9 @@ document.querySelector('.plan').addEventListener('click', () => {
 
 setUp()
 
-function setUp () {
-  if (supabase.auth.user() === null) {
+async function setUp () {
+  const user = await supabase.auth.user()
+  if (user === null) {
     document.location.href = '../signin'
   }
 }

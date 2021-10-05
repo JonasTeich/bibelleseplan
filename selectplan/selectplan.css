@@ -15,9 +15,20 @@ body {
 }
 
 header {
+  z-index: 1;
+  position: sticky;
+  top: 0;
   background-color: #34495e;
+  font-size: 20px;
   color: #fff;
+}
+
+header div {
   padding: 20px;
+  display: flex;
+  align-items: center;
+  max-width: 800px;
+  margin: auto;
 }
 
 .content {
