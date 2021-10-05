@@ -121,7 +121,7 @@ async function getDataFromSupabase () {
   
   if (parseInt(localStorage.getItem('selectedIndex'), 10) === count.count) {
     document.querySelector('.forward').style.opacity = .3
-    document.querySelector('.foward').style.cursor = 'not-allowed'
+    document.querySelector('.forward').style.cursor = 'not-allowed'
   }
   if (parseInt(localStorage.getItem('selectedIndex'), 10) === 1) {
     document.querySelector('.back').style.opacity = .3
