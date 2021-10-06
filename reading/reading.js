@@ -158,7 +158,7 @@ async function getDataFromSupabase () {
   }
   data.data[0].challenge.map((item) => {
     const li = document.createElement('li')
-    li.innerText = item
+    li.innerHTML = item
     document.querySelector('.challenge-list').appendChild(li)
   })
   data.data[0].thoughts.map((item) => {
