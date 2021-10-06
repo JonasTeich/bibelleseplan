@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   selectSelected()
   showChapter()
 })
+
 bookSelect.addEventListener('change', showChapter)
 chapterSelect.addEventListener('change', showChapter)
 document.querySelector('header .material-icons').addEventListener('click', () => {

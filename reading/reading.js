@@ -1,6 +1,6 @@
 const SUPABASE_URL = 'https://hkfomhpjagnnioxqgane.supabase.co'
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzMjgzMDY5NCwiZXhwIjoxOTQ4NDA2Njk0fQ.uYldi0Q_JK7bfYYjG98YctlmxQ7MWZfKqnvW_yalSAw'
-var supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+var supabase
 
 let data
 let logedInUser
@@ -8,6 +8,7 @@ let logedInUser
 setUp()
 
 async function setUp () {
+  supabase = await supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
   const user = await supabase.auth.user()
   if (user === null) {
     document.location.href = '../signin'
