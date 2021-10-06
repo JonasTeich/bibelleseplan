@@ -110,7 +110,7 @@ header .material-icons {
   border-radius: 5px;
 }
 
-.vers {
+.vers, .chapter-link {
   color: #34495e;
   text-decoration: underline;
   cursor: pointer;

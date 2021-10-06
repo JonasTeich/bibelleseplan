@@ -171,6 +171,15 @@ async function getDataFromSupabase () {
       showVers(list[i].classList[2], list[i].classList[3], list[i].classList[4], list[i].innerText, parseInt(list[i].classList[1].replace('f', '')))
     })
   }
+
+  const chapterList = document.querySelectorAll('.chapter-link')
+  for (let i = 0; i < chapterList.length; i++) {
+    chapterList[i].addEventListener('click', () => {
+      localStorage.setItem('selectedBook', chapterList[i].classList[1])
+      localStorage.setItem('selectedChapter', chapterList[i].classList[2])
+      document.location.href = '../bible'
+    })
+  }
 }
 
 function bibleVers (vers) {
