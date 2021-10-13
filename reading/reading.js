@@ -128,12 +128,15 @@ async function getDataFromSupabase () {
     document.querySelector('.back').style.opacity = .3
     document.querySelector('.back').style.cursor = 'not-allowed'
   }
-    
-  const point = document.querySelectorAll('.book-chapter-vers')
-  document.title = buildPointString(data.data[0].vers)
-  point.forEach((element) => {
-    element.innerText = buildPointString(data.data[0].vers)
-  })
+  
+  if (data.data[0].vers.length !== 0) {
+    const point = document.querySelectorAll('.book-chapter-vers')
+    document.querySelector('.lies').style.display = 'block'
+    document.title = buildPointString(data.data[0].vers)
+    point.forEach((element) => {
+      element.innerText = buildPointString(data.data[0].vers)
+    })
+  }
   data.data[0].vers.map((vers) => {
     document.querySelector('.vers-text').innerHTML += bibleVers(vers) + '<br>'
   })
