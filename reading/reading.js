@@ -154,7 +154,7 @@ async function getDataFromSupabase () {
   }
   data.data[0].pray.map((item) => {
     const li = document.createElement('li')
-    li.innerText = item
+    li.innerHTML = item
     document.querySelector('.pray-list').appendChild(li)
   })
   if (data.data[0].challenge.length < 1) {
