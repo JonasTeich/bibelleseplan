@@ -34,12 +34,12 @@ export default {
   methods: {
     lastDay () {
       if (this.$route.params.day > 1) {
-        window.location.pathname = '/' + this.$route.params.plan + '/' + (parseInt(this.$route.params.day, 10) - 1)
+        this.$router.push('/' + this.$route.params.plan + '/' + (parseInt(this.$route.params.day, 10) - 1))
       }
     },
     nextDay () {
       if (this.$route.params.day < this.count) {
-        window.location.pathname = '/' + this.$route.params.plan + '/' + (parseInt(this.$route.params.day, 10) + 1)
+        this.$router.push('/' + this.$route.params.plan + '/' + (parseInt(this.$route.params.day, 10) + 1))
       }
     }
   }

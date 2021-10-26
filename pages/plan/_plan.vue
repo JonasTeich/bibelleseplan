@@ -89,7 +89,7 @@ export default {
   async beforeCreate() {
     const me = await this.$supabase.auth.user()
     if (me === null) {
-      window.location.pathname = '/login'
+      this.$router.push('/login')
     }
   },
   mounted() {
@@ -98,7 +98,7 @@ export default {
   },
   methods: {
     openDay (selectedDay) {
-      window.location.pathname = '/' + this.selectedPlanName + '/' + selectedDay
+      this.$router.push('/' + this.selectedPlanName + '/' + selectedDay)
     },
     openDialog (selectedDay) {
       document.body.classList.add('overflow-hidden')

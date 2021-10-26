@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     openPlan (selectedPlan) {
-      window.location.pathname = '/plan/' + selectedPlan
+      this.$router.push('/plan/' + selectedPlan)
     }
   }
 }

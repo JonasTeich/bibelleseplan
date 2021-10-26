@@ -24,7 +24,7 @@ export default {
   }),
   beforeCreate () {
     if (this.$supabase.auth.user()) {
-      window.location.pathname = '/'
+      this.$router.push('/')
     }
   },
   methods: {
@@ -36,7 +36,7 @@ export default {
       if (error) {
         this.errormessage = error.message
       } else {
-        window.location.pathname = '/'
+        this.$router.push('/')
       }
     }
   }

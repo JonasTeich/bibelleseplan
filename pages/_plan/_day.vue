@@ -60,7 +60,7 @@ export default {
   async mounted() {
     const me = await this.$supabase.auth.user()
     if (me === null) {
-      window.location.pathname = '/login'
+      this.$router.push('/login')
     }
   },
   mounted() {

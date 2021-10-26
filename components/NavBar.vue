@@ -28,18 +28,18 @@ export default {
   },
   methods: {
     openBible () {
-      window.location.pathname = '/bible'
+      this.$router.push('/bible')
     },
     goBack () {
-      if (Object.keys(this.$route.params).length === 2) {
-        window.location.pathname = '/plan/' + this.$route.params.plan
-      } else if (Object.keys(this.$route.params).length === 1) {
-        window.location.pathname = '/plans'
-      } else if (window.location.pathname === '/bible') {
+      // if (Object.keys(this.$route.params).length === 2) {
+      //   window.location.pathname = '/plan/' + this.$route.params.plan
+      // } else if (Object.keys(this.$route.params).length === 1) {
+      //   window.location.pathname = '/plans'
+      // } else if (window.location.pathname === '/bible') {
         this.$router.go(-1)
-      } else {
-        window.location.pathname = '/'
-      }
+      // } else {
+      //   window.location.pathname = '/'
+      // }
     }
   }
 }

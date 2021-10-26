@@ -29,7 +29,7 @@ export default {
   }),
   beforeCreate () {
     if (this.$supabase.auth.user()) {
-      window.location.pathname = '/'
+      this.$router.push('/')
     }
   },
   methods: {
@@ -45,7 +45,7 @@ export default {
           .from('users')
           .update({ username: this.username })
           .match(user)
-        window.location.pathname = '/'
+        this.$router.push('/')
       }
     }
   }
