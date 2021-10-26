@@ -1,0 +1,40 @@
+<template>
+  <div class="fixed w-full h-full bg-gray-700 flex items-center justify-center bg-opacity-40 z-30 p-4">
+    <div class="w-800 rounded bg-white p-4">
+      <div class="flex text-1xl w-full justify-between mb-4">
+        <h3 class="text-2xl">{{ headline }}</h3>
+        <fa
+          :icon="['fas', 'times']"
+          class="text-gray-700 text-2xl"
+          v-on:click.stop="closeDialog()"
+        />
+      </div>
+      <slot />
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    headline: {
+      type: String,
+      required: true,
+      default: ''
+    }
+  },
+  methods: {
+    closeDialog () {
+      document.body.classList.add('overflow-scroll')
+      this.$parent.showDialog = false
+    }
+  }
+}
+</script>
+
+<style scoped>
+.w-800 {
+  min-width: 100%;
+  max-width: 800px;
+}
+</style>

@@ -1,82 +1,71 @@
 <template>
-  <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">
-        bibelleseplan
-      </h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
+  <div>
+    <NavBar :title="title" />
+    <div class="min-h-screen max-w-full flex flex-col justify-center items-center">
+      <Logo class="fill-current text-gray-700" />
+      <h1 class="text-5xl mb-10">Missionsteam</h1>
+      <div class="flex mb-2">
+        <NuxtLink
+          to="/plans"
+          class="rounded p-2 bg-gray-700 text-white mx-1"
         >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
+          Bibellesepläne
+        </NuxtLink>
+        <NuxtLink
+          to="/bible"
+          class="rounded p-2 bg-gray-700 text-white mx-1"
         >
-          GitHub
-        </a>
+          Bibel
+        </NuxtLink>
       </div>
+      <NuxtLink
+        to="/signup"
+        class="text-gray-500 hover:underline"
+      >
+        Registrieren
+      </NuxtLink>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  async mounted() {
-    console.log(this.$supabase);
+  async beforeCreate() {
+    const me = await this.$supabase.auth.user()
+    if (me === null) {
+      window.location.pathname = '/login'
+    }
+  },
+  mounted() {
+    this.$store.dispatch('getUsers')
+  },
+  computed: {
+    title () {
+      return 'Willkommen ' + this.myUsername
+    },
+    users() {
+      return JSON.parse(JSON.stringify(this.$store.state.users))
+    },
+    myUserId() {
+      return this.$supabase.auth.user().id
+    },
+    myUsername() {
+      let username = ''
+      this.users.map(user => {
+        if (user.id === this.myUserId) {
+          username = user.username
+        }
+      })
+      return username
+    }
   }
 }
 </script>
 
 <style>
-/* Sample `apply` at-rules with Tailwind CSS
-.container {
-@apply min-h-screen flex justify-center items-center text-center mx-auto;
-}
-*/
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
 
-.title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+* {
+  font-family: 'Montserrat', sans-serif;
 }
 </style>
