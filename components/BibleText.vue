@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h2 class="text-2xl font-bold">Lies {{ verses.text }}</h2>
-    <p v-html="buildVersString(verses)" class="vers-text text-xl"></p>
+    <h2 class="text-xl font-bold">Lies {{ verses.text }}</h2>
+    <p v-html="buildVersString(verses)" class="vers-text tex-lg"></p>
   </div>
 </template>
 

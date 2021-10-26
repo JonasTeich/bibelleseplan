@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h2 class="text-2xl font-bold">Einleitung</h2>
-    <p v-html="text" class="text-xl"></p>
+    <h2 class="text-xl font-bold">Einleitung</h2>
+    <p v-html="text" class="text-lg"></p>
   </div>
 </template>
 

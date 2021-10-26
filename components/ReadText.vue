@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p v-html="editText" ref="textElement" class="text-xl"></p>
+    <p v-html="editText" ref="textElement" class="text-lg"></p>
   </div>
 </template>
 

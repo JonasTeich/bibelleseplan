@@ -1,5 +1,5 @@
 <template>
-  <div class="h-16 bg-gray-300 fixed left-0 bottom-0 right-0 text-white flex items-center z-10">
+  <div class="h-24 bg-gray-300 fixed left-0 bottom-0 right-0 text-white flex items-center z-10">
     <div class="flex max-w-800 m-auto w-full justify-between p-4 text-xl leading-5">
       <fa
         :icon="['fas', 'angle-left']"

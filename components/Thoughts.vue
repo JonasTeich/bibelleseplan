@@ -1,6 +1,6 @@
  <template>
   <div>
-    <h2 class="text-2xl font-bold">Gedanken</h2>
+    <h2 class="text-xl font-bold">Gedanken</h2>
     <div class="flex py-4 items-center">
       <input
       v-model="thoughtText"

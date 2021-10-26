@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-800 m-auto min-h-screen p-4 pt-20" :class="{ 'pb-20': isDay }">
+  <div class="max-w-800 m-auto min-h-screen p-4 pt-20" :class="{ 'pb-28': isDay }">
     <slot />
   </div>
 </template>

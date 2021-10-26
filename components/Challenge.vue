@@ -1,8 +1,8 @@
 <template>
   <div v-if="challenge.length > 0">
-    <h2 class="text-2xl font-bold">Challenge</h2>
+    <h2 class="text-xl font-bold">Challenge</h2>
     <ul class="pl-6">
-      <li ref="textElement" v-for="item in challengeText" v-html="item" :key="item" class="list-disc text-xl"></li>
+      <li ref="textElement" v-for="item in challengeText" v-html="item" :key="item" class="list-disc text-lg"></li>
     </ul>
   </div>
 </template>
@@ -42,12 +42,14 @@ export default {
   },
   updated() {
     // Add eventlistener to all verses in text
-    for (let j = 0; j < this.$refs.textElement.length; j++) {
-      for (let i = 0; i < this.$refs.textElement[j].children.length; i++) {
-        this.$refs.textElement[j].children[i].addEventListener('click', e => {
-          const dialogVers = this.buildVersString(this.selectedVerse[parseInt(e.target.id, 10)])
-          this.$emit('childToParent', { "vers": dialogVers, "headline": this.selectedVerse[parseInt(e.target.id, 10)].text })
-        })
+    if (this.$refs.textElement) {
+      for (let j = 0; j < this.$refs.textElement.length; j++) {
+        for (let i = 0; i < this.$refs.textElement[j].children.length; i++) {
+          this.$refs.textElement[j].children[i].addEventListener('click', e => {
+            const dialogVers = this.buildVersString(this.selectedVerse[parseInt(e.target.id, 10)])
+            this.$emit('childToParent', { "vers": dialogVers, "headline": this.selectedVerse[parseInt(e.target.id, 10)].text })
+          })
+        }
       }
     }
   }

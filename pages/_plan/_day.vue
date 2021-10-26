@@ -80,6 +80,7 @@ export default {
         .filter('id', 'eq', selectedDay)
     },
     openDialog (value) {
+      document.body.classList.add('overflow-hidden')
       this.showDialog = true
       this.dialogVers = value.vers
       this.dialogHeadline = value.headline
