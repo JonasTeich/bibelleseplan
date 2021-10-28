@@ -28,13 +28,6 @@
     "_name": "_cf6fbf6e"
   },
   {
-    "name": "plan-plan",
-    "path": "/plan/:plan?",
-    "component": "C:\\\\Users\\\\jonas\\\\Documents\\\\GitHub\\\\Bibelleseplan\\\\pages\\\\plan\\\\_plan.vue",
-    "chunkName": "pages/plan/_plan",
-    "_name": "_2ebb78e4"
-  },
-  {
     "name": "index",
     "path": "/",
     "component": "C:\\\\Users\\\\jonas\\\\Documents\\\\GitHub\\\\Bibelleseplan\\\\pages\\\\index.vue",
@@ -42,10 +35,17 @@
     "_name": "_68a232e1"
   },
   {
+    "name": "plan",
+    "path": "/:plan",
+    "component": "C:\\\\Users\\\\jonas\\\\Documents\\\\GitHub\\\\Bibelleseplan\\\\pages\\\\_plan\\\\index.vue",
+    "chunkName": "pages/_plan/index",
+    "_name": "_3312398b"
+  },
+  {
     "name": "plan-day",
-    "path": "/:plan/:day?",
-    "component": "C:\\\\Users\\\\jonas\\\\Documents\\\\GitHub\\\\Bibelleseplan\\\\pages\\\\_plan\\\\_day.vue",
-    "chunkName": "pages/_plan/_day",
-    "_name": "_fa40a098"
+    "path": "/:plan/:day",
+    "component": "C:\\\\Users\\\\jonas\\\\Documents\\\\GitHub\\\\Bibelleseplan\\\\pages\\\\_plan\\\\_day\\\\index.vue",
+    "chunkName": "pages/_plan/_day/index",
+    "_name": "_4e93524e"
   }
 ]

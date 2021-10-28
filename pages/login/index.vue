@@ -11,7 +11,7 @@
       <input v-model="password" type="password" class="rounded border p-2 my-2">
     </label>
     <button v-on:click="login" class="p-2 rounded bg-gray-700 text-white my-4 text-xl">Anmelden</button>
-    <a href="../signin" class="w-full text-center hover:underline text-gray-400 text-xl">Account erstellen</a>
+    <NuxtLink to="../signup" class="w-full text-center hover:underline text-gray-400 text-xl">Account erstellen</NuxtLink>
   </div>
 </template>
 
@@ -22,7 +22,7 @@ export default {
     password: '',
     errormessage: ''
   }),
-  beforeCreate () {
+  beforeCreate() {
     if (this.$supabase.auth.user()) {
       this.$router.push('/')
     }
@@ -36,7 +36,7 @@ export default {
       if (error) {
         this.errormessage = error.message
       } else {
-        this.$router.push('/')
+        this.$router.go(-1)
       }
     }
   }

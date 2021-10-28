@@ -4,20 +4,31 @@
       v-if="showDialog"
       :headline="dialogHeadline"
     >
-      <p class="mb-4">{{ dialogVers }}</p>
-      <NuxtLink to="../bible" class="hover:underline text-blue-900">
+      <p class="mb-4" v-html="dialogVers"></p>
+      <NuxtLink :to="{name: 'bible', params: {book: dialogBook, chapter: dialogChapter}}" class="hover:underline text-blue-900">
         Im Kontext lesen
       </NuxtLink>
     </Dialog>
     <NavBar :title="title"/>
-    <Container v-if="selectedDayData" :isDay="true">
-      <Introduction v-on:childToParent="openDialog" class="section my-6" :text="selectedDayData.introduction" v-if="selectedDayData.introduction" />
-      <BibleText class="section my-6" :verses="selectedDayData.vers" />
-      <ReadText v-on:childToParent="openDialog" class="section my-6" :text="selectedDayData.text" v-if="selectedDayData.text" />
-      <Think v-on:childToParent="openDialog" class="section my-6" :think="selectedDayData.think" />
-      <Pray v-on:childToParent="openDialog" class="section my-6" :pray="selectedDayData.pray" />
-      <Challenge v-on:childToParent="openDialog" class="section my-6" :challenge="selectedDayData.challenge" />
-      <Thoughts class="section my-6" :thoughts="selectedDayData.thoughts" />
+    <Container :isDay="true">
+      <div v-if="me === null" class="flex flex-col items-center">
+        <h2 class="text-2xl mb-6">Du bist nicht angemeldet</h2>
+        <NuxtLink
+          to="../login"
+          class="rounded p-3 bg-gray-700 text-white mx-1"
+        >
+          Anmelden
+        </NuxtLink>
+      </div>
+      <div v-if="selectedDayData && me">
+        <Introduction v-on:childToParent="openDialog" class="section my-6" :text="selectedDayData.introduction" v-if="selectedDayData.introduction" />
+        <BibleText class="section my-6" :verses="selectedDayData.vers" />
+        <ReadText v-on:childToParent="openDialog" class="section my-6" :text="selectedDayData.text" v-if="selectedDayData.text" />
+        <Think v-on:childToParent="openDialog" class="section my-6" :think="selectedDayData.think" />
+        <Pray v-on:childToParent="openDialog" class="section my-6" :pray="selectedDayData.pray" />
+        <Challenge v-on:childToParent="openDialog" class="section my-6" :challenge="selectedDayData.challenge" />
+        <Thoughts class="section my-6" :thoughts="selectedDayData.thoughts" />
+      </div>
     </Container>
     <Footer :check="check" :count="count" />
   </div>
@@ -29,6 +40,8 @@ export default {
     showDialog: false,
     dialogVers: '',
     dialogHeadline: '',
+    dialogBook: '',
+    dialogChapter: 0,
     count: 0
   }),
   computed: {
@@ -41,13 +54,13 @@ export default {
     users() {
       return JSON.parse(JSON.stringify(this.$store.state.users))
     },
-    myUserId() {
-      return this.$supabase.auth.user().id
+    me() {
+      return this.$supabase.auth.user()
     },
     myUsername() {
       let username = ''
       this.users.map(user => {
-        if (user.id === this.myUserId) {
+        if (user.id === this.me.id) {
           username = user.username
         }
       })
@@ -55,12 +68,6 @@ export default {
     },
     title() {
       return 'Tag ' + this.$route.params.day
-    }
-  },
-  async mounted() {
-    const me = await this.$supabase.auth.user()
-    if (me === null) {
-      this.$router.push('/login')
     }
   },
   mounted() {
@@ -81,9 +88,12 @@ export default {
     },
     openDialog (value) {
       document.body.classList.add('overflow-hidden')
+      document.body.classList.remove('overflow-y-scroll')
       this.showDialog = true
       this.dialogVers = value.vers
       this.dialogHeadline = value.headline
+      this.dialogBook = value.book
+      this.dialogChapter = value.chapter
     }
   }
 }

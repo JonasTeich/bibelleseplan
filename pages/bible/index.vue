@@ -52,19 +52,26 @@ export default {
         }
       })
     }
+  },
+  mounted() {
+    if (this.$route.params.book) {
+      this.selectedBook = this.$route.params.book
+      this.selectedChapter = this.$route.params.chapter
+      this.displayChapter()
+    }
   }
 }
 </script>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gideon+Roman&display=swap');;
 
 * {
   font-family: 'Montserrat', sans-serif;
 }
 
 .bible-text p, .bible-text span {
-  font-family: 'DM Serif Text', serif;
+  font-family: 'Gideon Roman', cursive;
 }
 </style>

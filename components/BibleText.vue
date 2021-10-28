@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h2 class="text-xl font-bold">Lies {{ verses.text }}</h2>
-    <p v-html="buildVersString(verses)" class="vers-text tex-lg"></p>
+    <h2 class="text-lg font-bold">Lies {{ verses.text }}</h2>
+    <p v-html="buildVersString(verses)" class="vers-text"></p>
   </div>
 </template>
 
@@ -43,9 +43,9 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gideon+Roman&display=swap');
 
 .vers-text {
-  font-family: 'DM Serif Text', serif;
+  font-family: 'Gideon Roman', cursive;
 }
 </style>

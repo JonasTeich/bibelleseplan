@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     openPlan (selectedPlan) {
-      this.$router.push('/plan/' + selectedPlan)
+      this.$router.push('/' + selectedPlan)
     }
   }
 }

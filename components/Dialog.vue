@@ -25,7 +25,8 @@ export default {
   },
   methods: {
     closeDialog () {
-      document.body.classList.add('overflow-scroll')
+      document.body.classList.add('overflow-y-scroll')
+      document.body.classList.remove('overflow-hidden')
       this.$parent.showDialog = false
     }
   }
@@ -34,7 +35,7 @@ export default {
 
 <style scoped>
 .w-800 {
-  min-width: 100%;
   max-width: 800px;
+  min-width: 100%;
 }
 </style>

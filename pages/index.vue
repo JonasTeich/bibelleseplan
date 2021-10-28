@@ -30,12 +30,6 @@
 
 <script>
 export default {
-  async beforeCreate() {
-    const me = await this.$supabase.auth.user()
-    if (me === null) {
-      this.$router.push('/login')
-    }
-  },
   mounted() {
     this.$store.dispatch('getUsers')
   },

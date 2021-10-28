@@ -8,9 +8,9 @@ const _eafefb42 = () => interopDefault(import('..\\pages\\bible\\index.vue' /* w
 const _5862578a = () => interopDefault(import('..\\pages\\login\\index.vue' /* webpackChunkName: "pages/login/index" */))
 const _54ec31e9 = () => interopDefault(import('..\\pages\\plans\\index.vue' /* webpackChunkName: "pages/plans/index" */))
 const _cf6fbf6e = () => interopDefault(import('..\\pages\\signup\\index.vue' /* webpackChunkName: "pages/signup/index" */))
-const _2ebb78e4 = () => interopDefault(import('..\\pages\\plan\\_plan.vue' /* webpackChunkName: "pages/plan/_plan" */))
 const _68a232e1 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
-const _fa40a098 = () => interopDefault(import('..\\pages\\_plan\\_day.vue' /* webpackChunkName: "pages/_plan/_day" */))
+const _3312398b = () => interopDefault(import('..\\pages\\_plan\\index.vue' /* webpackChunkName: "pages/_plan/index" */))
+const _4e93524e = () => interopDefault(import('..\\pages\\_plan\\_day\\index.vue' /* webpackChunkName: "pages/_plan/_day/index" */))
 
 const emptyFn = () => {}
 
@@ -40,16 +40,16 @@ export const routerOptions = {
     component: _cf6fbf6e,
     name: "signup"
   }, {
-    path: "/plan/:plan?",
-    component: _2ebb78e4,
-    name: "plan-plan"
-  }, {
     path: "/",
     component: _68a232e1,
     name: "index"
   }, {
-    path: "/:plan/:day?",
-    component: _fa40a098,
+    path: "/:plan",
+    component: _3312398b,
+    name: "plan"
+  }, {
+    path: "/:plan/:day",
+    component: _4e93524e,
     name: "plan-day"
   }],
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p v-html="editText" ref="textElement" class="text-lg"></p>
+    <p v-html="editText" ref="textElement"></p>
   </div>
 </template>
 
@@ -27,9 +27,10 @@ export default {
     if (match !== null) {
       const versesJSON = JSON.parse('[' + match[0].replace(/}.+{/g, '},{') + ']')
       let i = 0
-      versesJSON.map(vers => {
-        this.selectedVerse.push(vers) 
-        this.editText = this.editText.replace(JSON.stringify(vers), '<span id="' + i + '" class="underline text-blue-900">' + vers.text + '</span>')
+      this.selectedVerse = []
+      versesJSON.forEach(vers => {
+        this.selectedVerse.push(vers)
+        this.editText = this.editText.replace(JSON.stringify(vers), '<span id="' + i + '" class="underline text-blue-900">' + this.buildVersName(vers) + '</span>')
         i++
       })
     }
@@ -39,7 +40,7 @@ export default {
     for (let i = 0; i < this.$refs.textElement.children.length; i++) {
       this.$refs.textElement.children[i].addEventListener('click', e => {
         const dialogVers = this.buildVersString(this.selectedVerse[parseInt(e.target.id, 10)])
-        this.$emit('childToParent', { "vers": dialogVers, "headline": this.selectedVerse[parseInt(e.target.id, 10)].text })
+        this.$emit('childToParent', { vers: dialogVers, headline: this.buildVersName(this.selectedVerse[parseInt(e.target.id, 10)]), book: this.selectedVerse[parseInt(e.target.id, 10)].book, chapter: this.selectedVerse[parseInt(e.target.id, 10)].chapter })
       })
     }
   },
@@ -47,20 +48,27 @@ export default {
     // returns vers as String
     buildVersString (versObject) {
       let string = ''
-      for (let i = 0; i < versObject.count; i++) {
+      for (let i = 0; i < (versObject.endVers - versObject.startVers + 1); i++) {
         bible.filter(book => {
-          if (versObject.book === book.abbrev) {
+          if (versObject.book === book.name) {
             book.chapters.map(chapter => {
-              if (parseInt(versObject.chapter, 10) === (book.chapters.indexOf(chapter) + 1)) {
+              if (versObject.chapter === (book.chapters.indexOf(chapter) + 1)) {
                 chapter.map(vers => {
-                  if (parseInt(versObject.vers, 10) === (chapter.indexOf(vers) + 1 + i)) {
-                    string += vers
+                  if (versObject.startVers === (chapter.indexOf(vers) + 1 + i)) {
+                    string += (versObject.startVers + i) + ' ' + vers + '<br>'
                   }
                 })
               }
             })
           }
         })
+      }
+      return string
+    },
+    buildVersName(versObject) {
+      let string = versObject.book + ' ' + versObject.chapter + ', ' + versObject.startVers
+      if (versObject.startVers !== versObject.endVers) {
+        string += '-' + versObject.endVers
       }
       return string
     }
