@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="text-lg font-bold">Lies {{ verses.text }}</h2>
+    <h2 class="text-lg font-bold">Lies {{ buildVersName(verses) }}</h2>
     <p v-html="buildVersString(verses)" class="vers-text"></p>
   </div>
 </template>
@@ -21,20 +21,27 @@ export default {
   methods: {
     buildVersString (versObject) {
       let string = ''
-      for (let i = 0; i < versObject.count; i++) {
+      for (let i = 0; i < (versObject.endVers - versObject.startVers + 1); i++) {
         bible.filter(book => {
-          if (versObject.book === book.abbrev) {
+          if (versObject.book === book.name) {
             book.chapters.map(chapter => {
-              if (parseInt(versObject.chapter, 10) === (book.chapters.indexOf(chapter) + 1)) {
+              if (versObject.chapter === (book.chapters.indexOf(chapter) + 1)) {
                 chapter.map(vers => {
-                  if (parseInt(versObject.vers, 10) === (chapter.indexOf(vers) + 1 + i)) {
-                    string += vers + '<br>'
+                  if (versObject.startVers === (chapter.indexOf(vers) + 1 + i)) {
+                    string += (versObject.startVers + i) + ' ' + vers + '<br>'
                   }
                 })
               }
             })
           }
         })
+      }
+      return string
+    },
+    buildVersName(versObject) {
+      let string = versObject.book + ' ' + versObject.chapter + ', ' + versObject.startVers
+      if (versObject.startVers !== versObject.endVers) {
+        string += '-' + versObject.endVers
       }
       return string
     }

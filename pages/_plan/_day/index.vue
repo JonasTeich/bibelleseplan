@@ -5,11 +5,11 @@
       :headline="dialogHeadline"
     >
       <p class="mb-4" v-html="dialogVers"></p>
-      <NuxtLink :to="{name: 'bible', params: {book: dialogBook, chapter: dialogChapter}}" class="hover:underline text-blue-900">
+      <NuxtLink v-on:click.native="closeDialog()" :to="{name: 'bible', params: {book: dialogBook, chapter: dialogChapter}}" class="hover:underline text-blue-900">
         Im Kontext lesen
       </NuxtLink>
     </Dialog>
-    <NavBar :title="title"/>
+    <NavBar :pathname="selectedPlanName" :title="title"/>
     <Container :isDay="true">
       <div v-if="me === null" class="flex flex-col items-center">
         <h2 class="text-2xl mb-6">Du bist nicht angemeldet</h2>
@@ -68,6 +68,9 @@ export default {
     },
     title() {
       return 'Tag ' + this.$route.params.day
+    },
+    selectedPlanName() {
+      return this.$route.params.plan
     }
   },
   mounted() {
@@ -94,6 +97,11 @@ export default {
       this.dialogHeadline = value.headline
       this.dialogBook = value.book
       this.dialogChapter = value.chapter
+    },
+    closeDialog () {
+      document.body.classList.add('overflow-y-scroll')
+      document.body.classList.remove('overflow-hidden')
+      this.showDialog = false
     }
   }
 }

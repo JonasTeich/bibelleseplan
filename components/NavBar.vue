@@ -24,6 +24,11 @@ export default {
       type: String,
       required: true,
       default: 'Title'
+    },
+    pathname: {
+      type: String,
+      required: false,
+      default: undefined
     }
   },
   methods: {
@@ -31,15 +36,11 @@ export default {
       this.$router.push('/bible')
     },
     goBack () {
-      // if (Object.keys(this.$route.params).length === 2) {
-      //   window.location.pathname = '/plan/' + this.$route.params.plan
-      // } else if (Object.keys(this.$route.params).length === 1) {
-      //   window.location.pathname = '/plans'
-      // } else if (window.location.pathname === '/bible') {
+      if (this.pathname !== undefined) {
+        this.$router.push('/' + this.pathname)
+      } else {
         this.$router.go(-1)
-      // } else {
-      //   window.location.pathname = '/'
-      // }
+      }
     }
   }
 }

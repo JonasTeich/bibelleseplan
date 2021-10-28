@@ -27,7 +27,7 @@
         </li>
       </ul>
     </Dialog>
-    <NavBar :title="title"/>
+    <NavBar pathname="plans" :title="title"/>
     <Container>
       <div v-if="me === null" class="flex flex-col items-center">
         <h2 class="text-2xl mb-6">Du bist nicht angemeldet</h2>
@@ -45,7 +45,7 @@
           :key="day.id"
           v-on:click="openDay(day.id)"
         >
-          <div class="absolute top-0 left-0 h-full bg-gray-700 bg-opacity-20" :style="{ width: (readUsers[day.id - 1].length / users.length * 100) + '%' }"></div>
+          <div class="absolute top-0 left-0 h-full bg-gray-700 bg-opacity-20" :style="{ width: (day.read.length / users.length * 100) + '%' }"></div>
           <span class="w-full">Tag {{ day.id }}</span>
           <fa
             :icon="['fas', 'info-circle']"
@@ -76,6 +76,7 @@ export default {
     },
     selectedPlanData() {
       const data = JSON.parse(JSON.stringify(this.$store.state.plan)).sort((a, b) => parseFloat(a.id) - parseFloat(b.id))
+      this.readUsers = []
       data.map(day => {
         this.readUsers.push(day.read)
       })

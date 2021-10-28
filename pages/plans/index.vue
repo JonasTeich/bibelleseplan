@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NavBar :title="title"/>
+    <NavBar pathname="" :title="title"/>
     <Container>
       <div 
         class="h-20 w-full bg-gray-200 rounded flex justify-center items-center text-2xl mb-2"
