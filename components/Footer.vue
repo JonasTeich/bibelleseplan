@@ -45,9 +45,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.max-w-800 {
-  max-width: 800px;
-}
-</style>

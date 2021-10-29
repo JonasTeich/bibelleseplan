@@ -16,3 +16,7 @@ body {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+.max-w-800 {
+  max-width: 800px;
+}
