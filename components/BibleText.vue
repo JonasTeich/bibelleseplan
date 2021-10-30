@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="text-lg font-bold">Lies {{ buildVersName(verses) }}</h2>
+    <h2 v-if="verses.book" class="text-lg font-bold">Lies {{ buildVersName(verses) }}</h2>
     <p v-html="buildVersString(verses)" class="vers-text"></p>
   </div>
 </template>

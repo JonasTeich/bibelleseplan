@@ -40,12 +40,13 @@
       </div>
       <div v-if="me">
         <div 
-          class="relative day h-20 w-full bg-gray-200 flex items-center px-6 rounded my-2 text-xl justify-between overflow-hidden"
           v-for="day in selectedPlanData"
           :key="day.id"
+          class="relative day h-20 w-full bg-gray-200 flex items-center px-6 rounded my-2 text-xl justify-between overflow-hidden"
+          :class="{ 'today': day.id === currentDay }"
           v-on:click="openDay(day.id)"
         >
-          <div class="absolute top-0 left-0 h-full bg-gray-700 bg-opacity-20" :style="{ width: (day.read.length / users.length * 100) + '%' }"></div>
+          <div v-if="readUsers[day.id - 1]" class="absolute top-0 left-0 h-full bg-gray-700 bg-opacity-20" :style="{ width: (readUsers[day.id - 1].length / users.length * 100) + '%' }"></div>
           <span class="w-full">Tag {{ day.id }}</span>
           <fa
             :icon="['fas', 'info-circle']"
@@ -96,6 +97,13 @@ export default {
         }
       })
       return username
+    },
+    currentDay() {
+      const date1 = new Date(this.selectedPlanData[0].created_at)
+      const date2 = new Date()
+      const diffTime = Math.abs(date2 - date1);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+      return diffDays
     }
   },
   mounted() {
@@ -157,5 +165,8 @@ body::-webkit-scrollbar, .max-h-56::-webkit-scrollbar {
 .max-h-56 {
   -ms-overflow-style: none;
   scrollbar-width: none; 
+}
+.today {
+  outline: solid #374151;
 }
 </style>
