@@ -20,6 +20,7 @@
 
 <script>
 export default {
+  middleware: 'authenticated',
   data: () => ({
     titleText: 'Bibellesepläne'
   }),

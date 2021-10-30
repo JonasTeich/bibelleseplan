@@ -30,6 +30,7 @@
 
 <script>
 export default {
+  middleware: 'authenticated',
   mounted() {
     this.$store.dispatch('getUsers')
   },
@@ -46,7 +47,7 @@ export default {
     myUsername() {
       let username = ''
       this.users.map(user => {
-        if (user.id === this.myUserId) {
+        if (user.id === this.$supabase.auth.user().id) {
           username = user.username
         }
       })

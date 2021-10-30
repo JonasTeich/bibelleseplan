@@ -11,16 +11,7 @@
     </Dialog>
     <NavBar :pathname="selectedPlanName" :title="title"/>
     <Container :isDay="true">
-      <div v-if="me === null" class="flex flex-col items-center">
-        <h2 class="text-2xl mb-6">Du bist nicht angemeldet</h2>
-        <NuxtLink
-          to="../login"
-          class="rounded p-3 bg-gray-700 text-white mx-1"
-        >
-          Anmelden
-        </NuxtLink>
-      </div>
-      <div v-if="selectedDayData && me">
+      <div v-if="selectedDayData">
         <Introduction v-on:childToParent="openDialog" class="section my-6" :text="selectedDayData.introduction" v-if="selectedDayData.introduction" />
         <BibleText class="section my-6" :verses="selectedDayData.vers" />
         <ReadText v-on:childToParent="openDialog" class="section my-6" :text="selectedDayData.text" v-if="selectedDayData.text" />
@@ -36,6 +27,7 @@
 
 <script>
 export default {
+  middleware: 'authenticated',
   data: () => ({
     showDialog: false,
     dialogVers: '',

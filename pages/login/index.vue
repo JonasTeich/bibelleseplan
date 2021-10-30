@@ -24,22 +24,18 @@ export default {
     password: '',
     errormessage: ''
   }),
-  beforeCreate() {
-    if (this.$supabase.auth.user()) {
-      this.$router.push('/')
-    }
-  },
   methods: {
-    async login () {
-      const { error } = await this.$supabase.auth.signIn({
+    login () {
+      this.$supabase.auth.signIn({
         email: this.email,
         password: this.password,
+      }).then(response => {
+        if (response.error) {
+          this.errormessage = error.message
+        } else {
+          this.$router.push('/')
+        }
       })
-      if (error) {
-        this.errormessage = error.message
-      } else {
-        this.$router.go(-1)
-      }
     }
   }
 }
