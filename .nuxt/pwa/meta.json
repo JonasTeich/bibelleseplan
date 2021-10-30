@@ -1,5 +1,5 @@
 {
-  "title": "bibelleseplan",
+  "title": "Bibelleseplan",
   "meta": [
     {
       "hid": "charset",
@@ -18,7 +18,7 @@
     {
       "hid": "apple-mobile-web-app-title",
       "name": "apple-mobile-web-app-title",
-      "content": "bibelleseplan"
+      "content": "Bibelleseplan"
     },
     {
       "hid": "description",
@@ -35,13 +35,13 @@
       "hid": "og:title",
       "name": "og:title",
       "property": "og:title",
-      "content": "bibelleseplan"
+      "content": "Bibelleseplan"
     },
     {
       "hid": "og:site_name",
       "name": "og:site_name",
       "property": "og:site_name",
-      "content": "bibelleseplan"
+      "content": "Bibelleseplan"
     },
     {
       "hid": "og:description",
@@ -54,17 +54,17 @@
     {
       "hid": "shortcut-icon",
       "rel": "shortcut icon",
-      "href": "/_nuxt/icons/icon_64x64.d6417b.png"
+      "href": "/_nuxt/icons/icon_64x64.7d91db.png"
     },
     {
       "hid": "apple-touch-icon",
       "rel": "apple-touch-icon",
-      "href": "/_nuxt/icons/icon_512x512.d6417b.png",
+      "href": "/_nuxt/icons/icon_512x512.7d91db.png",
       "sizes": "512x512"
     },
     {
       "rel": "manifest",
-      "href": "/_nuxt/manifest.b168638b.json",
+      "href": "/_nuxt/manifest.046e0cb2.json",
       "hid": "manifest"
     }
   ],

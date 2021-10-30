@@ -69,6 +69,11 @@ export default {
     clickedDay: 0,
   }),
   computed: {
+    users() {
+      const data = this.$store.state.users
+      console.log(data)
+      return data
+    },
     selectedPlanName() {
       return this.$route.params.plan
     },
@@ -82,9 +87,6 @@ export default {
         this.readUsers.push(day.read)
       })
       return data
-    },
-    users() {
-      return JSON.parse(JSON.stringify(this.$store.state.users))
     },
     me() {
       return this.$supabase.auth.user()
@@ -168,5 +170,6 @@ body::-webkit-scrollbar, .max-h-56::-webkit-scrollbar {
 }
 .today {
   outline: solid #374151;
+  outline-width: thick;
 }
 </style>
