@@ -1,0 +1,4 @@
+export default {
+  plan: [],
+  users: []
+}

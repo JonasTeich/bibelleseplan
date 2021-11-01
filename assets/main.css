@@ -1,0 +1,22 @@
+.page-enter-active,
+.page-leave-active {
+ transition: opacity 0.2s;
+}
+.page-enter,
+.page-leave-to {
+ opacity: 0;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+body {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.max-w-800 {
+  max-width: 800px;
+}
