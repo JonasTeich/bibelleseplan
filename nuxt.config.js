@@ -7,6 +7,9 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
+    htmlAttrs: {
+      lang: 'de'
+    },
     title: 'Bibelleseplan Missionsteam',
     meta: [
       { charset: 'utf-8' },
@@ -62,7 +65,7 @@ export default {
   pwa: {
     manifest: {
       name: 'Bibelleseplan',
-      lang: 'en'
+      lang: 'de'
     }
   },
 
