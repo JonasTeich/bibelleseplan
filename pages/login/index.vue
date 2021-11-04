@@ -12,7 +12,7 @@
         <input v-model="password" type="password" class="rounded border p-2 my-2">
       </label>
       <button v-on:click="login" class="p-2 rounded bg-gray-700 text-white my-4 text-xl">Anmelden</button>
-      <NuxtLink to="../signup" class="w-full text-center hover:underline text-gray-400 text-xl">Account erstellen</NuxtLink>
+      <nuxt-link to="../signup" class="w-full text-center hover:underline text-gray-400 text-xl">Account erstellen</nuxt-link>
     </div>
   </div>
 </template>

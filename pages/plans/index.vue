@@ -1,20 +1,21 @@
 <template>
   <div>
-    <NavBar pathname="" :title="title"/>
+    <NavBar :showArrow="false" pathname="" :title="title"/>
     <Container>
       <div 
-        class="h-20 w-full bg-gray-200 rounded flex justify-center items-center text-2xl mb-2"
+        class="h-20 w-full bg-gray-100 rounded flex justify-center items-center text-2xl mb-2"
         v-on:click="openPlan('Jakobus')"
       >
         Jakobus
       </div>
       <div 
-        class="h-20 w-full bg-gray-200 rounded flex justify-center items-center text-2xl"
+        class="h-20 w-full bg-gray-100 rounded flex justify-center items-center text-2xl"
         v-on:click="openPlan('Kolosser')"
       >
         Kolosser
       </div>
     </Container>
+    <TabBar />
   </div>
 </template>
 

@@ -1,18 +1,13 @@
 <template>
   <div class="w-full h-16 bg-gray-700 fixed top-0 left-0 text-white flex items-center z-20">
-    <div class="flex max-w-800 m-auto w-full justify-between p-4 text-xl leading-5">
+    <div class="flex max-w-800 m-auto w-full items-center p-4 text-xl leading-5">
       <fa
-        v-if="$router.currentRoute.fullPath !== '/'"
-        v-on:click="goBack"
+        v-if="showArrow"
+        @click="goBack"
         :icon="['fas', 'arrow-left']"
-        class="text-2xl"
+        class="text-2xl mr-4"
       />
       <span>{{ title }}</span>
-      <fa
-        v-on:click="openBible"
-        :icon="['fas', 'bible']"
-        class="text-2xl"
-      />
     </div>
   </div>
 </template>
@@ -29,12 +24,14 @@ export default {
       type: String,
       required: false,
       default: undefined
+    },
+    showArrow: {
+      type: Boolean,
+      required: false,
+      default: true
     }
   },
   methods: {
-    openBible () {
-      this.$router.push('/bible')
-    },
     goBack () {
       if (this.pathname !== undefined) {
         this.$router.push('/' + this.pathname)

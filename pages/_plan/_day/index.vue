@@ -5,9 +5,9 @@
       :headline="dialogHeadline"
     >
       <p class="mb-4" v-html="dialogVers"></p>
-      <NuxtLink v-on:click.native="closeDialog()" :to="{name: 'bible', params: {book: dialogBook, chapter: dialogChapter}}" class="hover:underline text-blue-900">
+      <nuxt-link v-on:click.native="closeDialog()" :to="{name: 'bible', params: {book: dialogBook, chapter: dialogChapter}}" class="hover:underline text-blue-900">
         Im Kontext lesen
-      </NuxtLink>
+      </nuxt-link>
     </Dialog>
     <NavBar :pathname="selectedPlanName" :title="title"/>
     <Container :isDay="true">
@@ -22,6 +22,7 @@
       </div>
     </Container>
     <Footer :check="check" :count="count" />
+    <TabBar />
   </div>
 </template>
 

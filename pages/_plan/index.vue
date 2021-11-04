@@ -32,7 +32,7 @@
       <div 
         v-for="day in selectedPlanData"
         :key="day.id"
-        class="relative day h-20 w-full bg-gray-200 flex items-center px-6 rounded my-2 text-xl justify-between overflow-hidden"
+        class="relative day h-20 w-full bg-gray-100 flex items-center px-6 rounded my-2 text-xl justify-between overflow-hidden"
         :class="{ 'today': day.id === currentDay }"
         v-on:click="openDay(day.id)"
       >
@@ -46,6 +46,7 @@
         <CheckBox class="z-10" :check="check" :day="day.id - 1"/>
       </div>
     </Container>
+    <TabBar />
   </div>
 </template>
 
