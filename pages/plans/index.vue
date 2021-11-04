@@ -1,20 +1,18 @@
 <template>
-  <div>
-    <NavBar :showArrow="false" pathname="" :title="title"/>
-    <Container>
-      <div 
-        class="h-20 w-full bg-gray-100 rounded flex justify-center items-center text-2xl mb-2"
-        v-on:click="openPlan('Jakobus')"
-      >
-        Jakobus
-      </div>
-      <div 
-        class="h-20 w-full bg-gray-100 rounded flex justify-center items-center text-2xl"
-        v-on:click="openPlan('Kolosser')"
-      >
-        Kolosser
-      </div>
-    </Container>
+  <div class="p-4">
+    <h1 class="text-4xl py-4">Bibellesepläne</h1>
+    <div 
+      class="h-20 w-full bg-gray-100 rounded flex justify-center items-center text-2xl mb-2 mt-4"
+      v-on:click="openPlan('Jakobus')"
+    >
+      Jakobus
+    </div>
+    <div 
+      class="h-20 w-full bg-gray-100 rounded flex justify-center items-center text-2xl"
+      v-on:click="openPlan('Kolosser')"
+    >
+      Kolosser
+    </div>
     <TabBar />
   </div>
 </template>

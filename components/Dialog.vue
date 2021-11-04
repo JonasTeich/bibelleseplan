@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed w-full h-full bg-gray-700 flex items-center justify-center bg-opacity-40 z-30 p-4">
+  <div class="fixed top-0 left-0 w-full h-full bg-gray-700 flex items-center justify-center bg-opacity-40 z-30 p-4">
     <div class="w-800 rounded bg-white p-4">
       <div class="flex text-1xl w-full justify-between mb-4">
         <h3 class="text-2xl">{{ headline }}</h3>
