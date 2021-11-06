@@ -13,3 +13,7 @@ export const SET_USERS = (state, users) => {
 export const SET_REQUESTS = (state, requests) => {
   state.prayRequests = requests
 }
+
+export const SET_CALENDAR = (state, calendar) => {
+  state.calendar = calendar
+}

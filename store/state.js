@@ -1,5 +1,6 @@
 export default {
   plan: [],
   users: [],
-  prayRequests: []
+  prayRequests: [],
+  calendar: []
 }

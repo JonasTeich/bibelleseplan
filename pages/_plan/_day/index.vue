@@ -9,7 +9,7 @@
         Im Kontext lesen
       </nuxt-link>
     </Dialog>
-    <nuxt-link to="/plans">
+    <nuxt-link :to="'/' + $route.params.plan">
       <fa
         :icon="['fas', 'angle-left']"
         class="text-gray-700 text-3xl"
