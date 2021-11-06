@@ -28,3 +28,21 @@ export const getUsers = ({ commit }) => {
       commit('SET_USERS', response.data)
     })
 }
+
+export const getPrayRequests = ({ commit }) => {
+  supabase
+    .from('prayer_requests')
+    .select()
+    .then(response => {
+      commit('SET_REQUESTS', response.data)
+    })
+}
+
+export const getCalendar = ({ commit }) => {
+  supabase
+    .from('events')
+    .select()
+    .then(response => {
+      commit('SET_CALENDAR', response.data)
+    })
+}

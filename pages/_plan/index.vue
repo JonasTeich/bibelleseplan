@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="p-4 pb-24">
     <Dialog v-if="showDialog" :headline="'Tag ' + clickedDay">
       <ul class="max-h-56 overflow-y-scroll">
         <li
@@ -13,7 +13,7 @@
             class="text-green-400 text-xl"
           />
         </li>
-        <div class="w-full height-1 bg-gray-700 my-4"></div>
+        <div v-if="notReadUser.length > 0" class="w-full height-1 bg-gray-700 my-4"></div>
         <li
           v-for="user in notReadUser"
           :key="user"
@@ -27,25 +27,30 @@
         </li>
       </ul>
     </Dialog>
-    <NavBar pathname="plans" :title="selectedPlanName + ' Leseplan'"/>
-    <Container>
-      <div 
-        v-for="day in selectedPlanData"
-        :key="day.id"
-        class="relative day h-20 w-full bg-gray-200 flex items-center px-6 rounded my-2 text-xl justify-between overflow-hidden"
-        :class="{ 'today': day.id === currentDay }"
-        v-on:click="openDay(day.id)"
-      >
-        <div v-if="readUsers[day.id - 1]" class="absolute top-0 left-0 h-full bg-gray-700 bg-opacity-20" :style="{ width: (readUsers[day.id - 1].length / users.length * 100) + '%' }"></div>
-        <span class="w-full">Tag {{ day.id }}</span>
-        <fa
-          :icon="['fas', 'info-circle']"
-          class="text-gray-700 text-2xl mr-4 z-10"
-          v-on:click.stop="openDialog(day.id)"
-        />
-        <CheckBox class="z-10" :check="check" :day="day.id - 1"/>
-      </div>
-    </Container>
+    <nuxt-link to="/plans">
+      <fa
+        :icon="['fas', 'angle-left']"
+        class="text-gray-700 text-3xl"
+      />
+    </nuxt-link>
+    <h1 class="text-4xl py-4">{{ $route.params.plan }}</h1>
+    <div 
+      v-for="day in selectedPlanData"
+      :key="day.id"
+      class="relative day h-20 w-full bg-gray-100 flex items-center px-6 rounded my-2 text-xl justify-between overflow-hidden"
+      :class="{ 'today': day.id === currentDay }"
+      v-on:click="openDay(day.id)"
+    >
+      <div v-if="readUsers[day.id - 1]" class="absolute top-0 left-0 h-full bg-gray-700 bg-opacity-20" :style="{ width: (readUsers[day.id - 1].length / users.length * 100) + '%' }"></div>
+      <span class="w-full">Tag {{ day.id }}</span>
+      <fa
+        :icon="['fas', 'info-circle']"
+        class="text-gray-700 text-2xl mr-4 z-10"
+        v-on:click.stop="openDialog(day.id)"
+      />
+      <CheckBox class="z-10" :check="check" :day="day.id - 1"/>
+    </div>
+    <TabBar />
   </div>
 </template>
 

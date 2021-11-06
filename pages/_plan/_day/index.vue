@@ -1,27 +1,32 @@
 <template>
-  <div>
+  <div class="p-4 pb-24">
     <Dialog
       v-if="showDialog"
       :headline="dialogHeadline"
     >
       <p class="mb-4" v-html="dialogVers"></p>
-      <NuxtLink v-on:click.native="closeDialog()" :to="{name: 'bible', params: {book: dialogBook, chapter: dialogChapter}}" class="hover:underline text-blue-900">
+      <nuxt-link v-on:click.native="closeDialog()" :to="{name: 'bible', params: {book: dialogBook, chapter: dialogChapter}}" class="hover:underline text-blue-900">
         Im Kontext lesen
-      </NuxtLink>
+      </nuxt-link>
     </Dialog>
-    <NavBar :pathname="selectedPlanName" :title="title"/>
-    <Container :isDay="true">
-      <div v-if="selectedDayData">
-        <Introduction v-on:childToParent="openDialog" class="section my-6" :text="selectedDayData.introduction" v-if="selectedDayData.introduction" />
-        <BibleText class="section my-6" :verses="selectedDayData.vers" />
-        <ReadText v-on:childToParent="openDialog" class="section my-6" :text="selectedDayData.text" v-if="selectedDayData.text" />
-        <Think v-on:childToParent="openDialog" class="section my-6" :think="selectedDayData.think" />
-        <Pray v-on:childToParent="openDialog" class="section my-6" :pray="selectedDayData.pray" />
-        <Challenge v-on:childToParent="openDialog" class="section my-6" :challenge="selectedDayData.challenge" />
-        <Thoughts class="section my-6" :thoughts="selectedDayData.thoughts" />
-      </div>
-    </Container>
+    <nuxt-link :to="'/' + $route.params.plan">
+      <fa
+        :icon="['fas', 'angle-left']"
+        class="text-gray-700 text-3xl"
+      />
+    </nuxt-link>
+    <h1 class="text-4xl py-4">{{ $route.params.plan }} Tag {{ $route.params.day }}</h1>
+    <div v-if="selectedDayData">
+      <Introduction v-on:childToParent="openDialog" class="section my-6" :text="selectedDayData.introduction" v-if="selectedDayData.introduction" />
+      <BibleText class="section my-6" :verses="selectedDayData.vers" />
+      <ReadText v-on:childToParent="openDialog" class="section my-6" :text="selectedDayData.text" v-if="selectedDayData.text" />
+      <Think v-on:childToParent="openDialog" class="section my-6" :think="selectedDayData.think" />
+      <Pray v-on:childToParent="openDialog" class="section my-6" :pray="selectedDayData.pray" />
+      <Challenge v-on:childToParent="openDialog" class="section my-6" :challenge="selectedDayData.challenge" />
+      <Thoughts class="section my-6" :thoughts="selectedDayData.thoughts" />
+    </div>
     <Footer :check="check" :count="count" />
+    <TabBar />
   </div>
 </template>
 

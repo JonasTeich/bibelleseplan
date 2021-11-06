@@ -18,7 +18,7 @@
       <li 
         v-for="item in thoughts"
         :key="item.text"
-        class="thought p-2 bg-gray-200 rounded my-2"
+        class="thought p-2 bg-gray-100 rounded my-2"
       >
         {{ item.username }}:<br>
         {{ item.text }}

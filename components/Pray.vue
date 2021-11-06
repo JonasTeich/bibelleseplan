@@ -65,7 +65,7 @@ export default {
             book.chapters.map(chapter => {
               if (versObject.chapter === (book.chapters.indexOf(chapter) + 1)) {
                 chapter.map(vers => {
-                  if (versObject.startVers === (chapter.indexOf(vers) + 1 + i)) {
+                  if (versObject.startVers + i === (chapter.indexOf(vers) + 1)) {
                     string += (versObject.startVers + i) + ' ' + vers + '<br>'
                   }
                 })

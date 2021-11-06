@@ -9,3 +9,11 @@ export const SET_KOLOSSER = (state, kolosser) => {
 export const SET_USERS = (state, users) => {
   state.users = users
 }
+
+export const SET_REQUESTS = (state, requests) => {
+  state.prayRequests = requests
+}
+
+export const SET_CALENDAR = (state, calendar) => {
+  state.calendar = calendar
+}
