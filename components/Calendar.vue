@@ -16,13 +16,19 @@
             v-model="description"
           ></textarea>
           <button
-            class="p-2 rounded border bg-gray-700 text-white"
+            class="p-2 rounded border bg-gray-400 text-white"
             @click="enterDay"
           >Eintragen</button>
         </div>
         <div v-else>
           <h3 class="text-2xl text-gray-700">{{ title }}</h3>
-          <p v-if="description.length > 0" class="mt-2">{{ description }}</p>
+          <p v-if="description.length > 0" class="my-2">{{ description }}</p>
+          <button
+            v-if="username === myUsername"
+            @click="deleteEvent"
+            :icon="['fas', 'trash']"
+            class="bg-gray-400 text-white p-2 rounded"
+          >Eintrag löschen</button>
         </div>
       </Dialog>
       <vue-calendar
@@ -42,6 +48,7 @@ export default {
     events: [],
     selectedDay: '',
     title: '',
+    username: '',
     description: '',
     showDialog: false
   }),
@@ -54,6 +61,21 @@ export default {
       const date = new Date(this.selectedDay)
       console.log(this.selectedDay.date)
       return date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear()
+    },
+    users() {
+      return JSON.parse(JSON.stringify(this.$store.state.users))
+    },
+    myUserId() {
+      return this.$supabase.auth.user().id
+    },
+    myUsername() {
+      let username = ''
+      this.users.map(user => {
+        if (user.id === this.myUserId) {
+          username = user.username
+        }
+      })
+      return username
     }
   },
   watch: {
@@ -68,6 +90,7 @@ export default {
     dayClicked(day) {
       this.description = ''
       this.title = ''
+      this.username = this.myUsername
       this.isEntry = false
       this.selectedDay = day.date
       this.showDialog = true
@@ -78,6 +101,7 @@ export default {
       this.showDialog = true
       this.title = event.title
       this.description = event.description
+      this.username = event.username
     },
     monthChanged(start, end) {
       // Do something...
@@ -89,22 +113,34 @@ export default {
         start: date,
         end: date,
         title: this.title,
-        description: this.description
+        description: this.description,
+        username: this.myUsername
       }
       this.events.push({
         start: this.selectedDay,
         end: this.selectedDay,
         title: this.title,
-        description: this.description
+        description: this.description,
+        username: this.myUsername
       })
       this.showDialog = false
       await this.$supabase
         .from('events')
         .insert([entry])
+    },
+    async deleteEvent() {
+      await this.$supabase
+        .from('events')
+        .delete()
+        .match({ title: this.title, description: this.description, username: this.username })
+      const index = this.events.findIndex(x => x.title === this.title && x.description === this.description && x.username === this.username)
+      this.events.splice(index, 1)
+      this.showDialog = false
     }
   },
   mounted() {
     this.$store.dispatch('getCalendar')
+    this.$store.dispatch('getUsers')
   },
   created() {
     this.$calendar.eventBus.$on('show-all', events => this.showAll(events));
