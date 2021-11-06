@@ -18,16 +18,20 @@ export default {
       }
     }
   },
+  mounted() {
+    console.log(this.verses)
+  },
   methods: {
     buildVersString (versObject) {
       let string = ''
+      console.log(versObject.endVers - versObject.startVers + 1);
       for (let i = 0; i < (versObject.endVers - versObject.startVers + 1); i++) {
         bible.filter(book => {
           if (versObject.book === book.name) {
             book.chapters.map(chapter => {
               if (versObject.chapter === (book.chapters.indexOf(chapter) + 1)) {
                 chapter.map(vers => {
-                  if (versObject.startVers === (chapter.indexOf(vers) + 1 + i)) {
+                  if (versObject.startVers + i === (chapter.indexOf(vers) + 1)) {
                     string += (versObject.startVers + i) + ' ' + vers + '<br>'
                   }
                 })
