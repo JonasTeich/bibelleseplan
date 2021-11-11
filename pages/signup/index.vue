@@ -29,11 +29,6 @@ export default {
     password: '',
     errormessage: ''
   }),
-  beforeCreate () {
-    if (this.$supabase.auth.user()) {
-      this.$router.push('/')
-    }
-  },
   methods: {
     async signup () {
       const { user, error } = await this.$supabase.auth.signUp({
@@ -43,11 +38,14 @@ export default {
       if (error) {
         this.errormessage = error.message
       } else {
-        await this.$supabase
+        console.log(user)
+        this.$supabase
           .from('users')
           .update({ username: this.username })
-          .match(user)
-        this.$router.push('/')
+          .match({ username: user.email })
+          .then(() => {
+            this.$router.push('/')
+          })
       }
     }
   }
