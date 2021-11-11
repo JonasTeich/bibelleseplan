@@ -59,7 +59,6 @@ export default {
     selectedDate() {
       if (this.selectedDay === '') return 
       const date = new Date(this.selectedDay)
-      console.log(this.selectedDay.date)
       return date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear()
     },
     users() {

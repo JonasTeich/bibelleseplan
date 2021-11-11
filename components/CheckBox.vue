@@ -53,9 +53,6 @@ export default {
 </script>
 
 <style scoped>
-* {
-  accent-color: #374151;
-}
 input {
   transform: scale(1.55);
 }

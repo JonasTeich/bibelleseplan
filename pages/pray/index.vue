@@ -1,21 +1,30 @@
 <template>
   <div class="p-4 pb-24">
+    <Dialog v-if="showDialog" headline="Gebetsanliegen">
+      <select v-model="selectedType" class="w-full p-2 rounded bg-gray-200">
+        <option value="thank">Dank</option>
+        <option value="request">Bitte</option>
+        <option value="answered">Erhörung</option>
+      </select>
+      <button @click="saveRequest" class="rounded p-2 bg-green-400 text-white mt-4">Senden</button>
+    </Dialog>
     <h1 class="text-4xl py-4">Gebetsanliegen</h1>
-      <div class="flex py-4 items-center overflow-y-auto">
-        <input
-          v-model="prayRequest"
-          type="text"
-          class="border rounded w-full p-2"
-          placeholder="Schreibe dein Gebetsanliegen..."
-        >
-        <fa
-          @click="saveRequest"
-          :icon="['fas', 'chevron-circle-right']"
-          class="text-4xl text-gray-700 ml-4"
-        />
-      </div>
-      <PrayList ref="list" />
-    <TabBar />
+    <div class="flex py-4 items-center overflow-y-auto">
+      <input
+        v-model="prayRequest"
+        @keypress.enter="openDialog"
+        type="text"
+        class="border rounded w-full p-2"
+        placeholder="Schreibe dein Gebetsanliegen..."
+      >
+      <fa
+        @click="openDialog"
+        :icon="['fas', 'chevron-circle-right']"
+        class="text-4xl text-gray-700 ml-4"
+      />
+    </div>
+    <pray-list ref="list" />
+    <tab-bar />
   </div>
 </template>
 
@@ -24,7 +33,9 @@ export default {
   middleware: 'authenticated',
   data: () => ({
     prayRequest: '',
-    requests: []
+    requests: [],
+    showDialog: false,
+    selectedType: 'thank'
   }),
   computed: {
     users() {
@@ -45,13 +56,16 @@ export default {
   },
   methods: {
     async saveRequest () {
-      const request = { text: this.prayRequest, username: this.myUsername }
+      this.showDialog = false
+      const request = { text: this.prayRequest, username: this.myUsername, status: this.selectedType }
       if (request.text.length > 3) {
-        this.requests.push(request)
         await this.$supabase.from('prayer_requests').insert([request])
         this.$refs.list.showRequest(request)
         this.prayRequest = ''
       }
+    },
+    openDialog() {
+      this.showDialog = true
     }
   }
 }

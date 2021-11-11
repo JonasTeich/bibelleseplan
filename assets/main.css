@@ -7,6 +7,10 @@
  opacity: 0;
 }
 
+* {
+  accent-color: #374151;
+}
+
 body::-webkit-scrollbar {
   display: none;
 }

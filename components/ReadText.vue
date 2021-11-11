@@ -21,11 +21,13 @@ export default {
   },
   mounted() {
     // Filter all verses from text and push to selectedVerse
-    const re = new RegExp('[{].+[}]', 'g')
+    const re = new RegExp('\{(.*?)\}', 'g')
     const match = this.text.match(re)
     this.editText = this.text
     if (match !== null) {
-      const versesJSON = JSON.parse('[' + match[0].replace(/}.+{/g, '},{') + ']')
+      const versesJSON = match.map(element => {
+        return JSON.parse(element)
+      })
       let i = 0
       this.selectedVerse = []
       versesJSON.forEach(vers => {

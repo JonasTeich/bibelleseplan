@@ -24,12 +24,14 @@ export default {
   },
   mounted() {
     // Filter all verses from text and push to selectedVerse
-    const re = new RegExp('[{].+[}]', 'g')
+    const re = new RegExp('\{(.*?)\}', 'g')
     this.challengeText = this.challenge.map(point => {
       const match = point.match(re)
       let newString = point
       if (match !== null) {
-        const versesJSON = JSON.parse('[' + match[0].replace(/}.+{/g, '},{') + ']')
+        const versesJSON = match.map(element => {
+          return JSON.parse(element)
+        })
         let i = 0
         versesJSON.map(vers => {
           this.selectedVerse.push(vers) 
