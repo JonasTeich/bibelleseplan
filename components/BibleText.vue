@@ -18,13 +18,9 @@ export default {
       }
     }
   },
-  mounted() {
-    console.log(this.verses)
-  },
   methods: {
     buildVersString (versObject) {
       let string = ''
-      console.log(versObject.endVers - versObject.startVers + 1);
       for (let i = 0; i < (versObject.endVers - versObject.startVers + 1); i++) {
         bible.filter(book => {
           if (versObject.book === book.name) {

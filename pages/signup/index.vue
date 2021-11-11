@@ -38,7 +38,6 @@ export default {
       if (error) {
         this.errormessage = error.message
       } else {
-        console.log(user)
         this.$supabase
           .from('users')
           .update({ username: this.username })
