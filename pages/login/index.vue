@@ -24,12 +24,27 @@ export default {
     password: '',
     errormessage: ''
   }),
+  mounted() {
+    // login with refresh token when there is one
+    const savedRefreshToken = localStorage.getItem('refreshToken')
+    if (savedRefreshToken) {
+      this.$supabase.auth.signIn({
+        refreshToken: savedRefreshToken,
+      }).then(response => {
+        if (response.data) {
+          localStorage.setItem('refreshToken', response.session.refresh_token)
+          this.$router.push('/')
+        }
+      })
+    }
+  },
   methods: {
     login () {
       this.$supabase.auth.signIn({
         email: this.email,
         password: this.password,
       }).then(response => {
+        localStorage.setItem('refreshToken', response.session.refresh_token)
         if (response.error) {
           this.errormessage = error.message
         } else {
