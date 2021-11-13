@@ -35,7 +35,7 @@ export default {
         let i = 0
         versesJSON.map(vers => {
           this.selectedVerse.push(vers) 
-          newString = point.replace(JSON.stringify(vers), '<span id="' + i + '" class="underline text-blue-900">' + this.buildVersName(vers) + '</span>')
+          newString = point.replace(JSON.stringify(vers), '<span id="' + i + '" class="underline text-gray-700">' + this.buildVersName(vers) + '</span>')
           i++
         })
       }

@@ -1,8 +1,19 @@
 <template>
-  <div v-if="pray.length > 0">
+  <div>
+    <Dialog v-if="showDialog" headline="Alle Gebetsanliegen">
+      <ul class="list-disc pl-6 mb-2">
+        <li
+          v-for="request in requests"
+          :key="request.text"
+        >
+          {{ request.text }}
+        </li>
+      </ul>
+    </Dialog>
     <h2 class="text-lg font-bold">Zum Beten</h2>
     <ul class="pl-6">
       <li ref="textElement" v-for="item in prayText" v-html="item" :key="item" class="list-disc"></li>
+      <li class="list-disc text-gray-700 underline" @click="openDialog">Unsere Gebetsanliegen</li>
     </ul>
   </div>
 </template>
@@ -13,7 +24,9 @@ import bible from 'assets/de_schlachter'
 export default {
   data: () => ({
     selectedVerse: [],
-    prayText: ''
+    prayText: '',
+    requests: [],
+    showDialog: false
   }),
   props: {
     pray: {
@@ -24,7 +37,18 @@ export default {
       }
     }
   },
+  computed: {
+    prayRequests() {
+      return JSON.parse(JSON.stringify(this.$store.state.prayRequests)).sort(function(){return 0.5 - Math.random()})
+    }
+  },
+  watch: {
+    prayRequests: function (val) {
+      this.requests = val
+    }
+  },
   mounted() {
+    this.$store.dispatch('getPrayRequests')
     // Filter all verses from text and push to selectedVerse
     const re = new RegExp('\{(.*?)\}', 'g')
     this.prayText = this.pray.map(point => {
@@ -37,7 +61,7 @@ export default {
         let i = 0
         versesJSON.map(vers => {
           this.selectedVerse.push(vers) 
-          newString = point.replace(JSON.stringify(vers), '<span id="' + i + '" class="underline text-blue-900">' + this.buildVersName(vers) + '</span>')
+          newString = point.replace(JSON.stringify(vers), '<span id="' + i + '" class="underline text-gray-700">' + this.buildVersName(vers) + '</span>')
           i++
         })
       }
@@ -84,6 +108,9 @@ export default {
         string += '-' + versObject.endVers
       }
       return string
+    },
+    openDialog() {
+      this.showDialog = true
     }
   }
 }

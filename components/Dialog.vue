@@ -23,6 +23,10 @@ export default {
       default: ''
     }
   },
+  mounted() {
+    document.body.classList.add('overflow-hidden')
+    document.body.classList.remove('overflow-y-scroll')
+  },
   methods: {
     closeDialog () {
       document.body.classList.add('overflow-y-scroll')

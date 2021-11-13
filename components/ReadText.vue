@@ -32,7 +32,7 @@ export default {
       this.selectedVerse = []
       versesJSON.forEach(vers => {
         this.selectedVerse.push(vers)
-        this.editText = this.editText.replace(JSON.stringify(vers), '<span id="' + i + '" class="underline text-blue-900">' + this.buildVersName(vers) + '</span>')
+        this.editText = this.editText.replace(JSON.stringify(vers), '<span id="' + i + '" class="underline text-gray-700">' + this.buildVersName(vers) + '</span>')
         i++
       })
     }

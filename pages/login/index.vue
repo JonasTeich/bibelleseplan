@@ -24,20 +24,6 @@ export default {
     password: '',
     errormessage: ''
   }),
-  mounted() {
-    // login with refresh token when there is one
-    const savedRefreshToken = localStorage.getItem('refreshToken')
-    if (savedRefreshToken) {
-      this.$supabase.auth.signIn({
-        refreshToken: savedRefreshToken,
-      }).then(response => {
-        if (response.data) {
-          localStorage.setItem('refreshToken', response.session.refresh_token)
-          this.$router.push('/')
-        }
-      })
-    }
-  },
   methods: {
     login () {
       this.$supabase.auth.signIn({
