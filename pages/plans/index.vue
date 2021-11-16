@@ -8,8 +8,7 @@
       Jakobus
     </div>
     <div 
-      class="h-20 w-full bg-gray-100 rounded flex justify-center items-center text-2xl"
-      v-on:click="openPlan('Kolosser')"
+      class="h-20 w-full bg-gray-100 rounded flex justify-center items-center text-2xl opacity-50"
     >
       Kolosser
     </div>

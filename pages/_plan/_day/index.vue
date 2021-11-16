@@ -5,7 +5,7 @@
       :headline="dialogHeadline"
     >
       <p class="mb-4" v-html="dialogVers"></p>
-      <nuxt-link v-on:click.native="closeDialog()" :to="{name: 'bible', params: {book: dialogBook, chapter: dialogChapter}}" class="hover:underline text-blue-900">
+      <nuxt-link v-on:click.native="closeDialog()" :to="{name: 'bible', params: {book: dialogBook, chapter: dialogChapter}}" class="underline text-gray-700">
         Im Kontext lesen
       </nuxt-link>
     </Dialog>
@@ -87,18 +87,11 @@ export default {
         .filter('id', 'eq', selectedDay)
     },
     openDialog (value) {
-      document.body.classList.add('overflow-hidden')
-      document.body.classList.remove('overflow-y-scroll')
       this.showDialog = true
       this.dialogVers = value.vers
       this.dialogHeadline = value.headline
       this.dialogBook = value.book
       this.dialogChapter = value.chapter
-    },
-    closeDialog () {
-      document.body.classList.add('overflow-y-scroll')
-      document.body.classList.remove('overflow-hidden')
-      this.showDialog = false
     }
   }
 }

@@ -19,8 +19,8 @@
           {{ request.text }}
         </li>
       </ul>
-      <nuxt-link v-if="requests.length > 0" to="./pray" class="text-blue-900">Alle anzeigen</nuxt-link>
-      <nuxt-link v-else to="./pray" class="text-blue-900">Gebetsanliegen teilen</nuxt-link>
+      <nuxt-link v-if="requests.length > 0" to="./pray" class="text-gray-700 underline">Alle anzeigen</nuxt-link>
+      <nuxt-link v-else to="./pray" class="text-gray-700">Gebetsanliegen teilen</nuxt-link>
     </div>
     <div class="w-full bg-gray-100 p-4 rounded mt-6">
       <h2 class="text-xl font-semibold mb-2">Kalender</h2>

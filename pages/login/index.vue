@@ -30,6 +30,7 @@ export default {
         email: this.email,
         password: this.password,
       }).then(response => {
+        localStorage.setItem('refreshToken', response.session.refresh_token)
         if (response.error) {
           this.errormessage = error.message
         } else {
