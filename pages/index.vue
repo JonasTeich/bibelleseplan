@@ -1,14 +1,14 @@
 <template>
   <div class="p-4 pb-24">
     <div class="text-4xl flex w-full justify-between items-center">Hallo {{ myUsername }}!<img src="../static/icon.png" class="logo" /></div>
-    <!-- <div class="w-full bg-gray-100 p-4 rounded mt-6">
+    <div class="w-full bg-gray-100 p-4 rounded mt-6">
       <h2 class="text-xl font-semibold mb-2">Heute</h2>
       <div class="h-24 w-full rounded bg-gray-400 text-white flex">
         <nuxt-link :to="'/Kolosser/' + currentDay" class="h-full w-full flex justify-center items-center text-center text-lg">
           Kolosser Tag {{ currentDay }}
         </nuxt-link>
       </div>
-    </div> -->
+    </div>
     <div class="w-full bg-gray-100 p-4 rounded mt-6">
       <h2 class="text-xl font-semibold mb-2">Gebetsanliegen</h2>
       <ul class="list-disc pl-6 mb-2">

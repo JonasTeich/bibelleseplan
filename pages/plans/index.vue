@@ -3,12 +3,13 @@
     <h1 class="text-4xl py-4">Bibellesepläne</h1>
     <div 
       class="h-20 w-full bg-gray-100 rounded flex justify-center items-center text-2xl mb-2 mt-4"
-      v-on:click="openPlan('Jakobus')"
+      @click="openPlan('Jakobus')"
     >
       Jakobus
     </div>
     <div 
-      class="h-20 w-full bg-gray-100 rounded flex justify-center items-center text-2xl opacity-50"
+      class="h-20 w-full bg-gray-100 rounded flex justify-center items-center text-2xl"
+      @click="openPlan('Kolosser')"
     >
       Kolosser
     </div>
