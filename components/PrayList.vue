@@ -49,7 +49,7 @@
       </li>
     </ul>
     <h2 class="text-xl mb-2">Erhörte Gebete:</h2>
-    <ul class="mb-4">
+    <ul>
       <li
         v-for="(request, index) in answeredRequests"
         :key="index"

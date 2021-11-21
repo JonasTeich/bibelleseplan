@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 pb-24">
+  <div class="p-4 pb-20">
     <div class="text-4xl flex w-full justify-between items-center">Hallo {{ myUsername }}!<img src="../static/icon.png" class="logo" /></div>
     <div class="w-full bg-gray-100 p-4 rounded mt-6">
       <h2 class="text-xl font-semibold mb-2">Heute</h2>
@@ -28,7 +28,6 @@
     </div>
     <div class="flex items-center justify-center">
     </div>
-    <tab-bar />
   </div>
 </template>
 

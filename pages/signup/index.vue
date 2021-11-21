@@ -15,7 +15,7 @@
         Passwort
         <input v-model="password" type="password" class="rounded border p-2 my-2">
       </label>
-      <button v-on:click="signup" class="p-2 rounded bg-gray-700 text-white my-4 text-xl">Account erstellen</button>
+      <button @click="signup" class="p-2 rounded bg-gray-700 text-white my-4 text-xl">Account erstellen</button>
       <nuxt-link to="../login" class="w-full text-center hover:underline text-gray-400 text-xl">Schon registriert</nuxt-link>
     </div>
   </div>

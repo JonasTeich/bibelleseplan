@@ -13,7 +13,6 @@
     >
       Kolosser
     </div>
-    <TabBar />
   </div>
 </template>
 

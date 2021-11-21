@@ -6,7 +6,7 @@
         <fa
           :icon="['fas', 'times']"
           class="text-gray-700 text-2xl"
-          v-on:click.stop="closeDialog()"
+          @click.stop="closeDialog()"
         />
       </div>
       <slot />

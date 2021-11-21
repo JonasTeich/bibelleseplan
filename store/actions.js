@@ -46,3 +46,12 @@ export const getCalendar = ({ commit }) => {
       commit('SET_CALENDAR', response.data)
     })
 }
+
+export const getSongs = ({ commit }) => {
+  supabase
+    .from('songs')
+    .select()
+    .then(response => {
+      commit('SET_SONGS', response.data)
+    })
+}
