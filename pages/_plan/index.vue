@@ -37,7 +37,7 @@
     <div 
       v-for="day in selectedPlanData"
       :key="day.id"
-      class="day relative h-20 w-full bg-gray-100 flex items-center px-6 rounded my-2 text-xl justify-between overflow-hidden"
+      class="day relative w-full bg-gray-100 flex items-center px-4 py-3 rounded my-2 text-xl justify-between overflow-hidden"
       :class="{ 'today': day.id === currentDay }"
       @click="openDay(day.id)"
     >
