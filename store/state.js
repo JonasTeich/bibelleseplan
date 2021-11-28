@@ -3,5 +3,6 @@ export default {
   users: [],
   prayRequests: [],
   calendar: [],
-  songs: []
+  songs: [],
+  missions: []
 }

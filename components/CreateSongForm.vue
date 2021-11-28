@@ -9,27 +9,25 @@
           @click="isOpen = false"
         />
       </div>
-      <div class="flex flex-col">
-        <label class="font-bold mb-4">
-          Titel<br>
-          <input class="w-full border rounded p-2" type="text" v-model="title">
-        </label>
-        <label class="font-bold mb-4">
-          Anzahl der Strophen<br>
-          <input class="w-full border rounded p-2" type="number" v-model="countOfVerses">
-        </label>
-        <label class="font-bold mb-4">
-          Refrain<br>
-          <textarea class="w-full border rounded p-2" cols="30" rows="10" v-model="refrain"></textarea>
-        </label>
-        <div v-for="(e, i) in verses" :key="i">
-          <label class="font-bold">
-            {{ i + 1 }}. Strophe
-            <textarea class="w-full border rounded p-2" cols="30" rows="10" v-model="verses[i]"></textarea>
-          </label>
-        </div>
-        <button @click="saveSong" class="p-2 rounded bg-green-400 text-white">Hochladen</button>
-      </div>
+      <v-expansion-panels>
+        <v-expansion-panel
+          v-for="(item, i) in newSong.verses"
+          :key="i"
+        >
+          <v-expansion-panel-header>
+            <h1 class="text-left" v-if="item.type === 0">{{ item.number }}. Strophe</h1>
+            <h1 class="text-left" v-else>Refrain</h1>
+          </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <v-tabs v-model="item.type">
+              <v-tab @click="item.number = newSong.verses[i - 1].number + 1">Strophe</v-tab>
+              <v-tab @click="/*Alle Nachfolgenden - 1*/">Refrain</v-tab>
+            </v-tabs>
+            <textarea class="mt-4 w-full border-2 bg-gray-100 rounded p-2" cols="30" rows="10" v-model="newSong.text"></textarea>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-expansion-panels>
+      <button class="p-2 rounded bg-gray-400 text-white w-full mt-4" @click="addVers">Vers hinzufügen</button>
     </div>
     <div @click="openForm" class="fixed bottom-20 right-4 rounded-full bg-gray-700 h-12 w-12 flex items-center justify-center">
       <fa :icon="['fas', 'plus']" class="text-2xl text-white" />
@@ -44,30 +42,38 @@ export default {
   },
   data: () => ({
     isOpen: false,
-    title: '',
     countOfVerses: 0,
-    verses: [],
-    refrain: ''
-  }),
-  watch: {
-    countOfVerses: function (val) {
-      this.verses.length = val
+    newSong: {
+      verses: [],
+      title: '',
+      number: 0
     }
-  },
+  }),
   methods: {
     openForm () {
       this.isOpen = true
     },
     async saveSong () {
       this.isOpen = false
-      await this.$supabase
-        .from('songs')
-        .insert([{ title: this.title, verses: this.verses, refrain: this.refrain, number: this.number + 1 }])
+    },
+    addVers () {
+      const prevVers = this.newSong.verses[this.newSong.verses.length - 1]
+      let type = 0
+      if (prevVers) {
+        if (prevVers.type === 0) {
+          type = 1
+        } else {
+          type = 0
+          this.countOfVerses++
+        }
+      } else {
+        this.countOfVerses++
+      }
+      this.newSong.verses.push({
+        number: this.countOfVerses,
+        type: type
+      })
     }
   }
 }
 </script>
-
-<style>
-
-</style>

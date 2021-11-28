@@ -21,3 +21,7 @@ export const SET_CALENDAR = (state, calendar) => {
 export const SET_SONGS = (state, songs) => {
   state.songs = songs
 }
+
+export const SET_MISSONS = (state, missions) => {
+  state.missions = missions
+}

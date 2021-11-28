@@ -55,3 +55,12 @@ export const getSongs = ({ commit }) => {
       commit('SET_SONGS', response.data)
     })
 }
+
+export const getMissions = ({ commit }) => {
+  supabase
+    .from('missions')
+    .select()
+    .then(response => {
+      commit('SET_MISSONS', response.data)
+    })
+}
