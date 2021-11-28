@@ -1,7 +1,7 @@
 <template>
   <nuxt-link :to="to" :class="{ 'text-gray-700': isActive }" class="text-gray-400 flex flex-col justify-center items-center">
-    <fa :icon="['fas', icon]" class="text-2xl" />
-    <span>
+    <fa :icon="['fas', icon]" class="text-xl" />
+    <span class="text-sm">
       <slot />
     </span>
   </nuxt-link>
@@ -9,9 +9,6 @@
 
 <script>
 export default {
-  data: () => ({
-    isActive: false
-  }),
   props: {
     to: {
       type: String,
@@ -22,12 +19,14 @@ export default {
       required: true
     }
   },
-  mounted() {
-    const route = this.$route.path
-    this.isActive = route === this.to
-    if (Object.keys(this.$route.params).length > 0 && this.to === '/plans') {
-      this.isActive = true
+  computed: {
+    isActive () {
+      const route = this.$route.path
+      if (Object.keys(this.$route.params).length > 0 && this.to === '/plans') {
+        return true
+      }
+      return route === this.to
     }
-  },
+  }
 }
 </script>

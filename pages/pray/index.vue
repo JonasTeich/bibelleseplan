@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 pb-24">
+  <div class="p-4 pb-20">
     <Dialog v-if="showDialog" headline="Gebetsanliegen">
       <select v-model="selectedType" class="w-full p-2 rounded bg-gray-200">
         <option value="thank">Dank</option>
@@ -24,7 +24,6 @@
       />
     </div>
     <pray-list ref="list" />
-    <tab-bar />
   </div>
 </template>
 
@@ -57,6 +56,8 @@ export default {
   methods: {
     async saveRequest () {
       this.showDialog = false
+      document.body.classList.add('overflow-scroll')
+      document.body.classList.remove('overflow-hidden')
       const request = { text: this.prayRequest, username: this.myUsername, status: this.selectedType }
       if (request.text.length > 3) {
         await this.$supabase.from('prayer_requests').insert([request])

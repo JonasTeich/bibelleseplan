@@ -17,3 +17,11 @@ export const SET_REQUESTS = (state, requests) => {
 export const SET_CALENDAR = (state, calendar) => {
   state.calendar = calendar
 }
+
+export const SET_SONGS = (state, songs) => {
+  state.songs = songs
+}
+
+export const SET_MISSONS = (state, missions) => {
+  state.missions = missions
+}

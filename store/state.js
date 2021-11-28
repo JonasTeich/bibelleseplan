@@ -2,5 +2,7 @@ export default {
   plan: [],
   users: [],
   prayRequests: [],
-  calendar: []
+  calendar: [],
+  songs: [],
+  missions: []
 }

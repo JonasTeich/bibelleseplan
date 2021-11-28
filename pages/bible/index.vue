@@ -1,21 +1,20 @@
 <template>
-  <div class="p-4 pb-24">
+  <div class="p-4 pb-20">
     <h1 class="text-4xl py-4">Die Bibel</h1>
     <div class="flex mb-6">
-      <select v-on:change="displayChapter" v-model="selectedBook" class="p-2 bg-gray-200 rounded-l w-full">
+      <select @change="displayChapter" v-model="selectedBook" class="p-2 bg-gray-200 rounded-l w-full">
         <option disabled value="">Wähle ein Buch</option>
         <option v-for="book in bible" :key="book.abbrev" :value="book.name">
           {{ book.name }}
         </option>
       </select>
-      <input v-on:change="displayChapter" :max="maxChapters" v-model.number="selectedChapter" class="p-2 bg-gray-700 text-white rounded-r w-14" type="number">
+      <input @change="displayChapter" :max="maxChapters" v-model.number="selectedChapter" class="p-2 bg-gray-700 text-white rounded-r w-14" type="number">
     </div>
     <div class="bible-text">
       <p v-for="(vers, index) in chapter" :key="vers">
         <span class="text-sm">{{ (index + 1) }}</span> {{ vers }}
       </p>
     </div>
-    <TabBar />
   </div>
 </template>
 
