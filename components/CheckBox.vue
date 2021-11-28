@@ -1,6 +1,6 @@
 <template>
   <div class="p-2">
-    <input @:click.stop="callParentMethode" v-model="isChecked" type="checkbox">
+    <input @click.stop="callParentMethode" v-model="isChecked" type="checkbox">
   </div>
 </template>
 

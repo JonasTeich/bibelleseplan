@@ -1,7 +1,7 @@
 <template>
-  <div class="fixed top-0 left-0 w-full h-full bg-gray-700 flex items-center justify-center bg-opacity-20 z-30 p-4">
+  <div  class="fixed top-0 left-0 w-full h-full bg-gray-700 flex items-center justify-center bg-opacity-20 z-30 p-4">
     <div class="w-800 rounded bg-white p-4 shadow-2xl">
-      <div class="flex text-1xl w-full justify-between mb-4">
+      <div class="flex text-1xl w-full justify-between mb-4 overflow-y-scroll">
         <h3 class="text-2xl">{{ headline }}</h3>
         <fa
           :icon="['fas', 'times']"
@@ -23,23 +23,25 @@ export default {
       default: ''
     }
   },
-  mounted() {
-    document.body.classList.add('overflow-hidden')
-    document.body.classList.remove('overflow-y-scroll')
+  mounted () {
+    document.body.classList.add('stop-scroll')
   },
   methods: {
     closeDialog () {
-      document.body.classList.add('overflow-y-scroll')
-      document.body.classList.remove('overflow-hidden')
+      document.body.classList.remove('stop-scroll')
       this.$parent.showDialog = false
     }
   }
 }
 </script>
 
-<style scoped>
+<style>
 .w-800 {
   max-width: 800px;
   min-width: 100%;
+}
+.stop-scroll {
+  overflow: hidden;
+  max-height: 100vh;
 }
 </style>
