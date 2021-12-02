@@ -11,6 +11,11 @@
   accent-color: #374151;
 }
 
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
 /* Hide Scrollbar */
 body::-webkit-scrollbar {
   display: none;
