@@ -56,8 +56,6 @@ export default {
   methods: {
     async saveRequest () {
       this.showDialog = false
-      document.body.classList.add('overflow-scroll')
-      document.body.classList.remove('overflow-hidden')
       const request = { text: this.prayRequest, username: this.myUsername, status: this.selectedType }
       if (request.text.length > 3) {
         await this.$supabase.from('prayer_requests').insert([request])

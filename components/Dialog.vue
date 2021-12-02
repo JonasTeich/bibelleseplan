@@ -23,25 +23,33 @@ export default {
       default: ''
     }
   },
+  created () {
+    window.addEventListener('scroll', () => {
+      document.documentElement.style.setProperty('--scroll-y', `${window.scrollY}px`)
+    })
+  },
   mounted () {
-    document.body.classList.add('stop-scroll')
+    const scrollY = document.documentElement.scrollTop
+    const body = document.body
+    body.style.position = 'fixed'
+    body.style.top = `-${scrollY}px`
   },
   methods: {
     closeDialog () {
-      document.body.classList.remove('stop-scroll')
+      const body = document.body
+      const scrollY = body.style.top
+      body.style.position = ''
+      body.style.top = ''
+      window.scrollTo(0, parseInt(scrollY || '0') * -1)
       this.$parent.showDialog = false
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
 .w-800 {
   max-width: 800px;
   min-width: 100%;
-}
-.stop-scroll {
-  overflow: hidden;
-  max-height: 100vh;
 }
 </style>

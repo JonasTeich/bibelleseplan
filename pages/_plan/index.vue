@@ -106,8 +106,6 @@ export default {
       this.$router.push('/' + this.selectedPlanName + '/' + selectedDay)
     },
     openDialog (selectedDay) {
-      document.body.classList.add('overflow-hidden')
-      document.body.classList.remove('overflow-y-scroll')
       this.notReadUser = this.getNotReadUser(this.selectedPlanData[selectedDay - 1].read)
       this.clickedDay = selectedDay
       this.showDialog = true
