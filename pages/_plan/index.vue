@@ -1,7 +1,7 @@
 <template>
   <div class="p-4 pb-20">
     <Dialog v-if="showDialog" :headline="'Tag ' + clickedDay">
-      <ul class="max-h-56 overflow-y-scroll">
+      <ul>
         <li
           v-for="user in selectedPlanData[clickedDay - 1].read"
           :key="user"
@@ -148,12 +148,8 @@ export default {
 .height-1 {
   height: 1px;
 }
-body::-webkit-scrollbar, .max-h-56::-webkit-scrollbar {
+body::-webkit-scrollbar, :-webkit-scrollbar {
   display: none;
-}
-.max-h-56 {
-  -ms-overflow-style: none;
-  scrollbar-width: none; 
 }
 .today {
   outline: solid #374151;

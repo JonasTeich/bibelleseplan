@@ -1,7 +1,7 @@
 <template>
-  <div class="fixed top-0 left-0 w-full h-full bg-gray-700 flex items-center justify-center bg-opacity-20 z-30 p-4">
-    <div class="w-800 rounded bg-white p-4 shadow-2xl">
-      <div class="flex text-1xl w-full justify-between mb-4 overflow-y-scroll">
+  <div class="fixed top-0 left-0 w-full h-full bg-gray-700 bg-opacity-20 z-30">
+    <div class="absolute w-full h-5/6 bottom-0 rounded bg-white p-4 pb-0 flex flex-col">
+      <div class="flex text-1xl w-full justify-between mb-4">
         <h3 class="text-2xl">{{ headline }}</h3>
         <fa
           :icon="['fas', 'times']"
@@ -9,7 +9,9 @@
           @click.stop="closeDialog()"
         />
       </div>
-      <slot />
+      <div class="h-full overflow-y-auto pb-4">
+        <slot />
+      </div>
     </div>
   </div>
 </template>

@@ -4,7 +4,7 @@
       v-if="showDialog"
       :headline="dialogHeadline"
     >
-      <p class="mb-4 max-h-96 overflow-y-scroll" v-html="dialogVers"></p>
+      <p class="mb-4" v-html="dialogVers"></p>
       <nuxt-link @click.native="closeDialog()" :to="{name: 'bible', params: {book: dialogBook, chapter: dialogChapter}}" class="underline text-gray-700">
         Im Kontext lesen
       </nuxt-link>

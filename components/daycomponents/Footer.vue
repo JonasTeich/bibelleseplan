@@ -1,7 +1,7 @@
 <template>
   <div
     class="transition-opacity opacity-1 fixed bottom-24 left-1/2 transform -translate-x-1/2 flex max-w-800 px-4 py-2 text-xl leading-5 bg-white mx-auto w-min rounded-full shadow-lg"
-    :class="{ 'opacity-0': !showBox }"
+    :class="{ 'opacity-0 pointer-events-none': !showBox }"
   >
     <fa
       :icon="['fas', 'angle-left']"
