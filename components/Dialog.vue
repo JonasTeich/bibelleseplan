@@ -25,11 +25,6 @@ export default {
       default: ''
     }
   },
-  created () {
-    window.addEventListener('scroll', () => {
-      document.documentElement.style.setProperty('--scroll-y', `${window.scrollY}px`)
-    })
-  },
   mounted () {
     const scrollY = document.documentElement.scrollTop
     const body = document.body
