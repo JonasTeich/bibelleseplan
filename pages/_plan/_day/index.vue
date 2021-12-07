@@ -20,9 +20,9 @@
       <introduction @childToParent="openDialog" class="section my-6" :text="selectedDayData.introduction" v-if="selectedDayData.introduction" />
       <bible-text class="section my-6" :verses="selectedDayData.vers" />
       <read-text @childToParent="openDialog" class="section my-6" :text="selectedDayData.text" v-if="selectedDayData.text" />
-      <think @:childToParent="openDialog" class="section my-6" :think="selectedDayData.think" />
+      <think @childToParent="openDialog" class="section my-6" :think="selectedDayData.think" />
       <pray @childToParent="openDialog" class="section my-6" :pray="selectedDayData.pray" />
-      <challenge @:childToParent="openDialog" class="section my-6" :challenge="selectedDayData.challenge" />
+      <challenge @childToParent="openDialog" class="section my-6" :challenge="selectedDayData.challenge" />
       <thoughts class="section my-6" :thoughts="selectedDayData.thoughts" />
     </div>
     <Footer :check="check" :count="count" />

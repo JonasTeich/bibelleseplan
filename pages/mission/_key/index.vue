@@ -20,6 +20,10 @@
         ></v-carousel-item>
       </v-carousel>
       <p class="mt-6">{{ selectedMissionary.text }}</p>
+      <h2 class="text-lg font-bold">Gebetsanliegen:</h2>
+      <ul class="list-disc">
+        <li v-for="(item, i) in selectedMissionary.pray_list" :key="i">{{ item }}</li>
+      </ul>
     </div>
   </v-app>
 </template>
@@ -31,37 +35,27 @@ export default {
   }),
   computed: {
     selectedMissionary () {
-      const data = this.$store.state.missions.filter(e => {
-        if (e.id === parseInt(this.$route.params.id)) {
-          return true
-        }
-      })
-      console.log(data);
-      return data[0]
+      return this.$store.state.missions.filter(e => e.key === this.selectedKey)[0]
+    },
+    selectedKey () {
+      return this.$route.params.key
     }
   },
   mounted () {
     this.$store.dispatch('getMissions')
     const { data, error } = this.$supabase.storage
       .from('missions')
-      .list('arthur')
+      .list(this.selectedKey)
       .then(response => {
         response.data.map(element => {
           this.$supabase.storage
             .from('missions')
-            .download('arthur/' + element.name)
+            .download(this.selectedKey + '/' + element.name)
             .then(response => {
-              this.blobToImg(response.data)
+              this.images.push(URL.createObjectURL(response.data))
             })
         })
       })
-  },
-  methods: {
-    blobToImg (blob) {
-      return new Promise(resolve => {
-        this.images.push(URL.createObjectURL(blob))
-      })
-    }
   }
 }
 </script>
