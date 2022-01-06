@@ -9,7 +9,7 @@
         placeholder="Schreibe deine Gedanken..."
       >
       <fa
-        @:click="sendThought"
+        @click="sendThought"
         :icon="['fas', 'chevron-circle-right']"
         class="text-4xl text-gray-700 ml-4"
       />

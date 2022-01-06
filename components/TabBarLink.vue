@@ -21,11 +21,7 @@ export default {
   },
   computed: {
     isActive () {
-      const route = this.$route.path
-      if (Object.keys(this.$route.params).length > 0 && this.to === '/plans') {
-        return true
-      }
-      return route === this.to
+      return this.$route.path.includes(this.to)
     }
   }
 }
