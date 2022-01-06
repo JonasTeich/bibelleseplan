@@ -13,7 +13,7 @@
 <script>
 export default {
   beforeMount () {
-    if (this.$route.pathname === undefined) {
+    if (this.$route.path === '/') {
       this.$router.push('/home')
     }
   }
