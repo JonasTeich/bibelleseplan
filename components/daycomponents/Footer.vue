@@ -9,7 +9,7 @@
       :class="{ 'opacity-40': parseInt($route.params.day, 10) === 1 }"
       @click="lastDay()"
     />
-    <CheckBox :check="check" :day="parseInt($route.params.day, 10) - 1" class="mx-10" />
+    <CheckBox :day="parseInt($route.params.day, 10) - 1" class="mx-10" />
     <fa
       :icon="['fas', 'angle-right']"
       class="text-gray-700 text-3xl"

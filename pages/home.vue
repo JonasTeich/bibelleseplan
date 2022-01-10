@@ -1,6 +1,9 @@
 <template>
   <div class="p-4 pb-20">
-    <div class="text-4xl flex w-full justify-between items-center">Hallo {{ myUsername }}!<img src="/static/icon.png" class="logo" /></div>
+    <div v-if="logedInUser" class="text-4xl flex w-full justify-between items-center">
+      Hallo {{ logedInUser.username }}!
+      <img src="~/static/icon.png" class="logo" />
+    </div>
     <div class="w-full bg-gray-100 p-4 rounded mt-6">
       <h2 class="text-xl font-semibold mb-2">Heute</h2>
       <div class="h-24 w-full rounded bg-gray-400 text-white flex">
@@ -38,39 +41,26 @@ export default {
     requests: []
   }),
   mounted() {
-    this.$store.dispatch('getUsers')
-    this.$store.dispatch('getPrayRequests')
-    this.$store.dispatch('getKolosser')
+    this.$store.dispatch('plans/initPlan', {
+      planName: 'Kolosser'
+    })
   },
   computed: {
-    prayRequests() {
-      return JSON.parse(JSON.stringify(this.$store.state.prayRequests)).sort(function(){return 0.5 - Math.random()}).slice(0,3)
+    prayRequests () {
+      return JSON.parse(JSON.stringify(this.$store.getters['prayerrequests/prayerRequests'])).sort(function(){return 0.5 - Math.random()}).slice(0,3)
     },
-    users() {
-      return JSON.parse(JSON.stringify(this.$store.state.users))
-    },
-    myUserId() {
-      return this.$supabase.auth.user().id
-    },
-    myUsername() {
-      let username = ''
-      this.users.map(user => {
-        if (user.id === this.$supabase.auth.user().id) {
-          username = user.username
-        }
-      })
-      return username
+    logedInUser () {
+      return this.$store.getters['users/logedInUser']
     },
     firstDay() {
-      return JSON.parse(JSON.stringify(this.$store.state.plan)).sort((a, b) => parseFloat(a.id) - parseFloat(b.id))[0]
+      return this.$store.getters['plans/selectedPlanData'][0]
     },
     currentDay() {
       if (!this.firstDay) return
       const date1 = new Date(this.firstDay.created_at)
       const date2 = new Date()
-      const diffTime = Math.abs(date2 - date1);
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-      return diffDays
+      const diffTime = Math.abs(date2 - date1)
+      return Math.ceil(diffTime / (1000 * 60 * 60 * 24))
     }
   },
   watch: {

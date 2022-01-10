@@ -28,7 +28,10 @@ export default {
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/vue-simple-calendar.js'],
+  plugins: [
+    '~/plugins/vue-simple-calendar.js',
+    '~/plugins/get-data.js'
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: {

@@ -1,52 +1,37 @@
 <template>
   <div class="p-2">
-    <input @click.stop="callParentMethode" v-model="isChecked" type="checkbox">
+    <input @click.stop="check" v-model="isChecked" type="checkbox">
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    day: {
-      type: Number,
-      required: true,
-      default: 0
-    },
-    check: Function
+    day: Number
+  },
+  data: () => ({
+    isChecked: false
+  }),
+  mounted () {
+    console.log(this.selectedPlanData);
+    this.isChecked = this.selectedPlanData[this.day].read.includes(this.logedInUser.username)
   },
   computed: {
-    selectedDayData() {
-      return JSON.parse(JSON.stringify(this.$store.state.plan)).sort((a, b) => parseFloat(a.id) - parseFloat(b.id))[this.day]
+    selectedPlanData () {
+      return this.$store.getters['plans/selectedPlanData']
     },
-    users() {
-      return JSON.parse(JSON.stringify(this.$store.state.users))
-    },
-    myUserId() {
-      return this.$supabase.auth.user().id
-    },
-    myUsername() {
-      let username = ''
-      this.users.map(user => {
-        if (user.id === this.myUserId) {
-          username = user.username
-        }
-      })
-      return username
-    },
-    isChecked: {
-      get() {
-        if (this.selectedDayData) {
-          return this.selectedDayData.read.includes(this.myUsername)
-        }
-      },
-      set() {
-
-      }
+    logedInUser () {
+      return this.$store.getters['users/logedInUser']
     }
   },
   methods: {
-    callParentMethode () {
-      this.check(this.day + 1)
+    check (e) {
+      this.$store.dispatch('plans/changeState', {
+        index: this.day,
+        check: e.target.checked,
+        username: this.logedInUser.username,
+        planName: this.$route.params.plan
+      })
     }
   }
 }

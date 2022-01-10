@@ -3,7 +3,7 @@
     <Dialog v-if="showDialog" headline="Gebetsanliegen">
       <span class="w-full">{{ selectedRequest.username }}:</span>
       {{ selectedRequest.text }}<br>
-      <div v-if="myUsername === selectedRequest.username" class="flex mt-4">
+      <div v-if="logedInUser.username === selectedRequest.username" class="flex mt-4">
         <button v-if="selectedRequest.status !== 'answered'" class="p-2 rounded bg-green-400 text-white mr-2" @click="saveStatus('answered', selectedRequest)">Erhört</button>
         <button class="p-2 rounded bg-red-400 text-white" @click="deleteRequest(selectedRequest)">
           <fa
@@ -79,28 +79,15 @@ export default {
     selectedRequest: {},
     showDialog: false
   }),
-  mounted() {
-    this.$store.dispatch('getUsers')
-    this.$store.dispatch('getPrayRequests')
-  },
   computed: {
     prayRequests() {
-      return JSON.parse(JSON.stringify(this.$store.state.prayRequests))
+      return this.$store.getters['prayerrequests/prayerRequests']
     },
     users() {
-      return JSON.parse(JSON.stringify(this.$store.state.users))
+      return this.$store.getters['users/allUsers']
     },
-    myUserId() {
-      return this.$supabase.auth.user().id
-    },
-    myUsername() {
-      let username = ''
-      this.users.map(user => {
-        if (user.id === this.$supabase.auth.user().id) {
-          username = user.username
-        }
-      })
-      return username
+    logedInUser () {
+      return this.$store.getters['users/logedInUser']
     }
   },
   watch: {

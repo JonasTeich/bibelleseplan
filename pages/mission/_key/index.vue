@@ -35,7 +35,7 @@ export default {
   }),
   computed: {
     selectedMissionary () {
-      return this.$store.state.missions.filter(e => e.key === this.selectedKey)[0]
+      return JSON.parse(JSON.stringify(this.$store.state.missions)).filter(e => e.key === this.selectedKey)[0]
     },
     selectedKey () {
       return this.$route.params.key

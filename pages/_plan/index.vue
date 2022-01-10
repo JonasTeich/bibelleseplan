@@ -48,7 +48,7 @@
         class="text-gray-700 text-2xl mr-4 z-10"
         @click.stop="openDialog(day.id)"
       />
-      <CheckBox class="z-10" :check="check" :day="day.id - 1"/>
+      <CheckBox class="z-10" :day="day.id - 1"/>
     </div>
   </div>
 </template>
@@ -62,32 +62,28 @@ export default {
     showDialog: false,
     clickedDay: 0,
   }),
+  mounted () {
+    this.$store.dispatch('plans/initPlan', {
+      planName: this.selectedPlanName
+    })
+  },
   computed: {
     users() {
-      return JSON.parse(JSON.stringify(this.$store.state.users))
+      return this.$store.getters['users/allUsers']
     },
     selectedPlanName() {
       return this.$route.params.plan
     },
     selectedPlanData() {
-      const data = JSON.parse(JSON.stringify(this.$store.state.plan)).sort((a, b) => parseFloat(a.id) - parseFloat(b.id))
+      const data = this.$store.getters['plans/selectedPlanData']
       this.readUsers = []
       data.map(day => {
         this.readUsers.push(day.read)
       })
       return data
     },
-    me() {
-      return this.$supabase.auth.user()
-    },
-    myUsername() {
-      let username = ''
-      this.users.map(user => {
-        if (user.id === this.me.id) {
-          username = user.username
-        }
-      })
-      return username
+    logedInUser () {
+      return this.$store.getters['users/logedInUser']
     },
     currentDay() {
       const date1 = new Date(this.selectedPlanData[0].created_at)
@@ -96,10 +92,6 @@ export default {
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
       return diffDays
     }
-  },
-  mounted() {
-    this.$store.dispatch('get' + this.$route.params.plan)
-    this.$store.dispatch('getUsers')
   },
   methods: {
     openDay (selectedDay) {
@@ -118,17 +110,6 @@ export default {
         }
       })
       return notReadUser
-    },
-    async check (selectedDay) {
-      if (this.readUsers[selectedDay - 1].includes(this.myUsername)) {
-        this.readUsers[selectedDay - 1].splice(this.readUsers[selectedDay - 1].indexOf(this.myUsername), 1)
-      } else {
-        this.readUsers[selectedDay - 1].push(this.myUsername)
-      }
-      await this.$supabase
-        .from(this.$route.params.plan)
-        .update({ read: this.readUsers[selectedDay - 1] })
-        .filter('id', 'eq', selectedDay)
     }
   }
 }

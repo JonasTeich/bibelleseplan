@@ -54,27 +54,15 @@ export default {
   }),
   computed: {
     calendarEvents() {
-      return JSON.parse(JSON.stringify(this.$store.state.calendar))
+      return this.$store.getters['calendar/calendarEvents']
     },
     selectedDate() {
       if (this.selectedDay === '') return 
       const date = new Date(this.selectedDay)
       return date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear()
     },
-    users() {
-      return JSON.parse(JSON.stringify(this.$store.state.users))
-    },
-    myUserId() {
-      return this.$supabase.auth.user().id
-    },
-    myUsername() {
-      let username = ''
-      this.users.map(user => {
-        if (user.id === this.myUserId) {
-          username = user.username
-        }
-      })
-      return username
+    logedInUser () {
+      return this.$store.getters['users/logedInUser']
     }
   },
   watch: {
@@ -89,7 +77,7 @@ export default {
     dayClicked(day) {
       this.description = ''
       this.title = ''
-      this.username = this.myUsername
+      this.username = this.logedInUser.username
       this.isEntry = false
       this.selectedDay = day.date
       this.showDialog = true
@@ -113,14 +101,14 @@ export default {
         end: date,
         title: this.title,
         description: this.description,
-        username: this.myUsername
+        username: this.logedInUser.username
       }
       this.events.push({
         start: this.selectedDay,
         end: this.selectedDay,
         title: this.title,
         description: this.description,
-        username: this.myUsername
+        username: this.logedInUser.username
       })
       this.showDialog = false
       await this.$supabase
@@ -138,8 +126,7 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch('getCalendar')
-    this.$store.dispatch('getUsers')
+    this.$store.dispatch('calendar/initEvents')
   },
   created() {
     this.$calendar.eventBus.$on('show-all', events => this.showAll(events));

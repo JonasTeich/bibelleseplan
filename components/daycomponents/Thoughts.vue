@@ -30,8 +30,7 @@
 <script>
 export default {
   data: () => ({
-    thoughtText: '',
-    username: ''
+    thoughtText: ''
   }),
   props: {
     thoughts: {
@@ -42,16 +41,14 @@ export default {
       }
     }
   },
-  async created () {
-    const { data } = await this.$supabase
-      .from('users')
-      .select()
-      .filter('id', 'eq', this.$supabase.auth.user().id)
-    this.username = data[0].username
+  computed: {
+    logedInUser () {
+      return this.$store.getters['users/logedInUser']
+    }
   },
   methods: {
     async sendThought () {
-      const thought = { text: this.thoughtText, username: this.username}
+      const thought = { text: this.thoughtText, username: this.logedInUser.username}
       if (thought.text.length > 3) {
         this.thoughts.push(thought)
         await this.$supabase

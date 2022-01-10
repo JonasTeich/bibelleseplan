@@ -25,7 +25,7 @@
       <challenge @childToParent="openDialog" class="section my-6" :challenge="selectedDayData.challenge" />
       <thoughts class="section my-6" :thoughts="selectedDayData.thoughts" />
     </div>
-    <Footer :check="check" :count="count" />
+    <Footer :count="count" />
   </div>
 </template>
 
@@ -40,27 +40,23 @@ export default {
     dialogChapter: 0,
     count: 0
   }),
+  mounted () {
+    this.$store.dispatch('plans/initPlan', {
+      planName: this.selectedPlanName
+    })
+  },
   computed: {
     selectedDayData() {
-      let data = JSON.parse(JSON.stringify(this.$store.state.plan)).sort((a, b) => parseFloat(a.id) - parseFloat(b.id))
+      let data = this.$store.getters['plans/selectedPlanData']
       this.count = data.length
       data = data[this.$route.params.day - 1]
       return data
     },
     users() {
-      return JSON.parse(JSON.stringify(this.$store.state.users))
+      return this.$store.getters['users/allUsers']
     },
-    me() {
-      return this.$supabase.auth.user()
-    },
-    myUsername() {
-      let username = ''
-      this.users.map(user => {
-        if (user.id === this.me.id) {
-          username = user.username
-        }
-      })
-      return username
+    logedInUser () {
+      return this.$store.getters['users/logedInUser']
     },
     title() {
       return 'Tag ' + this.$route.params.day
@@ -69,22 +65,7 @@ export default {
       return this.$route.params.plan
     }
   },
-  mounted() {
-    this.$store.dispatch('get' + this.$route.params.plan)
-    this.$store.dispatch('getUsers')
-  },
   methods: {
-    async check (selectedDay) {
-      if (this.selectedDayData.read.includes(this.myUsername)) {
-        this.selectedDayData.read.splice(this.selectedDayData.read.indexOf(this.myUsername), 1)
-      } else {
-        this.selectedDayData.read.push(this.myUsername)
-      }
-      await this.$supabase
-        .from(this.$route.params.plan)
-        .update({ read: this.selectedDayData.read })
-        .filter('id', 'eq', selectedDay)
-    },
     openDialog (value) {
       this.showDialog = true
       this.dialogVers = value.vers

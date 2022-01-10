@@ -11,7 +11,7 @@
 export default {
   computed: {
     missions () {
-      return this.$store.state.missions
+      return JSON.parse(JSON.stringify(this.$store.state.missions))
     }
   },
   mounted () {

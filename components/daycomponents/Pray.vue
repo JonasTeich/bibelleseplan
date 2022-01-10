@@ -39,7 +39,7 @@ export default {
   },
   computed: {
     prayRequests() {
-      return JSON.parse(JSON.stringify(this.$store.state.prayRequests)).sort(function(){return 0.5 - Math.random()})
+      return JSON.parse(JSON.stringify(this.$store.getters['prayerrequests/prayerRequests'])).sort(function(){return 0.5 - Math.random()})
     }
   },
   watch: {
@@ -48,7 +48,6 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch('getPrayRequests')
     // Filter all verses from text and push to selectedVerse
     const re = new RegExp('\{(.*?)\}', 'g')
     this.prayText = this.pray.map(point => {
