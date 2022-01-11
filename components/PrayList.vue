@@ -72,49 +72,36 @@
 <script>
 export default {
   data: () => ({
+    // TODO: Remove allRequests. You can find all request on the prayRequests already.
     allRequests: [],
-    requests: [],
-    thankRequest: [],
-    answeredRequests: [],
     selectedRequest: {},
     showDialog: false
   }),
   computed: {
     prayRequests() {
-      return this.$store.getters['prayerrequests/prayerRequests']
+      return this.$store.state.prayerrequests.prayerRequests
+    },
+    thankRequest () {
+      return this.prayRequests.filter(request => request.status === 'thank')
+    },
+    answeredRequests () {
+      console.log(this.prayRequests.filter(request => request.status !== 'thank'))
+      return this.prayRequests.filter(request => request.status === 'answered')
+    },
+    requests () {
+      return this.prayRequests.filter(request => request.status === 'request')
     },
     users() {
+      // TODO: You dont need to use getters, but you can. I find it better for me to directly compute on $store.state.[...]
       return this.$store.getters['users/allUsers']
     },
     logedInUser () {
       return this.$store.getters['users/logedInUser']
     }
   },
-  watch: {
-    prayRequests: function (val) {
-      this.allRequests = val
-      this.allRequests.map(request => {
-        if (request.status === 'thank') {
-          this.thankRequest.push(request)
-        } else if (request.status === 'answered') {
-          this.answeredRequests.push(request)
-        } else {
-          this.requests.push(request)
-        }
-      })
-    }
-  },
   methods: {
-    showRequest (request) {
-      if (request.status === 'thank') {
-        this.thankRequest.push(request)
-      } else if (request.status === 'answered') {
-        this.answeredRequests.push(request)
-      } else {
-        this.requests.push(request)
-      }
-    },
     async deleteRequest (request) {
+      // TODO: Move this into state actions
       this.showDialog = false
       this.requests.filter(element => {
         if (element === request) {
@@ -142,6 +129,7 @@ export default {
       this.showDialog = true
     },
     async saveStatus (status, request) {
+      // TODO: Move this into state actions
       this.showDialog = false
       this.requests.filter(element => {
         if (element === request) {
